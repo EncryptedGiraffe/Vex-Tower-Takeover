@@ -10,6 +10,3 @@
 # File ignores
 common.mk
 compile_commands.json
-Makefile
-project.pros
-include/api.h
