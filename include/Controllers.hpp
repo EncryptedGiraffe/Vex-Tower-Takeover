@@ -8,18 +8,23 @@ namespace Core
   extern Controller partner;
 }
 
+namespace Ports
+{
+  namespace Chassis
+  {
+    const int frontLeft = 0;
+    const int frontRight = 0;
+    const int backLeft = 0;
+    const int backRight = 0;
+  }
+  namespace Deploy
+  {
+    const int deploy = 0;
+  }
+}
+
 namespace Motors
 {
-  namespace Ports
-  {
-    namespace Chassis
-    {
-      const int frontLeft = 0;
-      const int frontRight = 0;
-      const int backLeft = 0;
-      const int backRight = 0;
-    }
-  }
   namespace Chassis
   {
     extern Motor frontLeft;
@@ -27,9 +32,19 @@ namespace Motors
     extern Motor backLeft;
     extern Motor backRight;
   }
+  namespace Deploy
+  {
+    extern Motor deploy;
+  }
 }
 
 namespace Chassis
+{
+  //extern std::shared_ptr<ChassisController> controller;
+  const auto controller = ChassisControllerBuilder().withMotors(1, -10).build();
+}
+
+namespace Deploy
 {
 
 }
