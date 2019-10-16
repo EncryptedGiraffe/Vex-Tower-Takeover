@@ -9,5 +9,5 @@
 
 # File ignores
 common.mk
-compile_commands.json
 temp.log
+compile_commands.json
