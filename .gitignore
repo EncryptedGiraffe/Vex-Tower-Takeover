@@ -1,16 +1,15 @@
-# Compiled Object files
-*.o
-*.obj
+# Folder ignores
+/.vscode
+/.git
+/bin
+/firmware
+/include/display
+/include/pros
+/include/okapi
+/.d
 
-# Executables
-*.bin
-*.elf
-
-# PROS
-bin/
-.vscode/
-compile_commands.json
+# File ignores
+common.mk
 temp.log
-temp.errors
-*.ini
-.d/
+compile_commands.json
+bin/_pros_ld_timestamp.o

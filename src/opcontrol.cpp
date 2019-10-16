@@ -1,8 +1,9 @@
 #include "main.h"
+#include "Controllers.hpp"
 
 void opcontrol()
 {
-	//temporary testing code
+	//////////Temporary Testing Code//////////
 	Motor c_frontLeft(1);
 	Motor c_frontRight(2);
 	Motor c_backLeft(3);
@@ -73,16 +74,15 @@ void opcontrol()
 			a_arm.moveRelative(-5, 200);
 		}
 
-
-
 		//set motors for mecanum drive
 		float ch1 = master.getAnalog(ControllerAnalog::rightX);
 		float ch4 = master.getAnalog(ControllerAnalog::leftX);
 		float ch3 = master.getAnalog(ControllerAnalog::leftY);
-		c_frontLeft.move_voltage(12000 * (ch3 + ch1 + ch4));
-		c_frontRight.move_voltage(-12000 * (ch3 - ch1 - ch4));
-		c_backLeft.move_voltage(12000 * (ch3 + ch1 - ch4));
-		c_backRight.move_voltage(-12000 * (ch3 - ch1 + ch4));
+		c_frontLeft.moveVoltage(12000 * (ch3 + ch1 + ch4));
+		c_frontRight.moveVoltage(-12000 * (ch3 - ch1 - ch4));
+		c_backLeft.moveVoltage(12000 * (ch3 + ch1 - ch4));
+		c_backRight.moveVoltage(-12000 * (ch3 - ch1 + ch4));
+		//////////End of testing code//////////
 
 		pros::delay(20);
 	}
