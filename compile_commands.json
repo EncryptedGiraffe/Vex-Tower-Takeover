@@ -273,7 +273,7 @@
             "-fdiagnostics-color",
             "--std=gnu++17",
             "-o",
-            "C:/Users/Kylen/AppData/Local/Temp/tmpztx4gw_y/Controllers.cpp.o",
+            "C:/Users/Kylen/AppData/Local/Temp/tmpindw8ovi/Controllers.cpp.o",
             "src\\Controllers.cpp"
         ],
         "directory": "C:\\Kylen\\Robots\\Vex-Tower-Takeover",
@@ -308,11 +308,11 @@
             "-fdiagnostics-color",
             "--std=gnu++17",
             "-o",
-            "C:/Users/Kylen/AppData/Local/Temp/tmpztx4gw_y/PANS/VisionSystem.cpp.o",
-            "src\\PANS\\VisionSystem.cpp"
+            "C:/Users/Kylen/AppData/Local/Temp/tmpindw8ovi/PANS/UISystem.cpp.o",
+            "src\\PANS\\UISystem.cpp"
         ],
         "directory": "C:\\Kylen\\Robots\\Vex-Tower-Takeover",
-        "file": "src\\PANS\\VisionSystem.cpp"
+        "file": "src\\PANS\\UISystem.cpp"
     },
     {
         "arguments": [
@@ -343,7 +343,7 @@
             "-fdiagnostics-color",
             "--std=gnu++17",
             "-o",
-            "C:/Users/Kylen/AppData/Local/Temp/tmpztx4gw_y/PANS/Core.cpp.o",
+            "C:/Users/Kylen/AppData/Local/Temp/tmpindw8ovi/PANS/Core.cpp.o",
             "src\\PANS\\Core.cpp"
         ],
         "directory": "C:\\Kylen\\Robots\\Vex-Tower-Takeover",
@@ -378,10 +378,10 @@
             "-fdiagnostics-color",
             "--std=gnu++17",
             "-o",
-            "C:/Users/Kylen/AppData/Local/Temp/tmpztx4gw_y/PANS/UISystem.cpp.o",
-            "src\\PANS\\UISystem.cpp"
+            "C:/Users/Kylen/AppData/Local/Temp/tmpindw8ovi/PANS/VisionSystem.cpp.o",
+            "src\\PANS\\VisionSystem.cpp"
         ],
         "directory": "C:\\Kylen\\Robots\\Vex-Tower-Takeover",
-        "file": "src\\PANS\\UISystem.cpp"
+        "file": "src\\PANS\\VisionSystem.cpp"
     }
 ]
