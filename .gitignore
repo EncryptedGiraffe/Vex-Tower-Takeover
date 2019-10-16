@@ -6,6 +6,7 @@
 /include/display
 /include/pros
 /include/okapi
+.d
 
 # File ignores
 common.mk

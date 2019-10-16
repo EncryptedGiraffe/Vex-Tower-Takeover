@@ -260,41 +260,6 @@
             "-isystemc:\\users\\kylen\\appdata\\local\\programs\\pros\\toolchain\\usr\\bin\\../lib/gcc/arm-none-eabi/7.2.1/include-fixed",
             "-isystemc:\\users\\kylen\\appdata\\local\\programs\\pros\\toolchain\\usr\\bin\\../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/include",
             "-iquote./include",
-            "-iquote./include/./",
-            "-mcpu=cortex-a9",
-            "-mfpu=neon-fp16",
-            "-mfloat-abi=softfp",
-            "-D_POSIX_THREADS",
-            "-D_UNIX98_THREAD_MUTEX_ATTRIBUTES",
-            "-Os",
-            "-funwind-tables",
-            "-ffunction-sections",
-            "-fdata-sections",
-            "-fdiagnostics-color",
-            "--std=gnu++17",
-            "-o",
-            "C:/Users/Kylen/AppData/Local/Temp/tmpindw8ovi/Controllers.cpp.o",
-            "src\\Controllers.cpp"
-        ],
-        "directory": "C:\\Kylen\\Robots\\Vex-Tower-Takeover",
-        "file": "src\\Controllers.cpp"
-    },
-    {
-        "arguments": [
-            "clang++",
-            "-c",
-            "-target",
-            "armv7ar-none-none-eabi",
-            "-fno-ms-extensions",
-            "-fno-ms-compatibility",
-            "-fno-delayed-template-parsing",
-            "-isystemc:\\users\\kylen\\appdata\\local\\programs\\pros\\toolchain\\usr\\bin\\../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/include/c++/7.2.1",
-            "-isystemc:\\users\\kylen\\appdata\\local\\programs\\pros\\toolchain\\usr\\bin\\../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/include/c++/7.2.1/arm-none-eabi/thumb/v7-ar/fpv3/softfp",
-            "-isystemc:\\users\\kylen\\appdata\\local\\programs\\pros\\toolchain\\usr\\bin\\../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/include/c++/7.2.1/backward",
-            "-isystemc:\\users\\kylen\\appdata\\local\\programs\\pros\\toolchain\\usr\\bin\\../lib/gcc/arm-none-eabi/7.2.1/include",
-            "-isystemc:\\users\\kylen\\appdata\\local\\programs\\pros\\toolchain\\usr\\bin\\../lib/gcc/arm-none-eabi/7.2.1/include-fixed",
-            "-isystemc:\\users\\kylen\\appdata\\local\\programs\\pros\\toolchain\\usr\\bin\\../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/include",
-            "-iquote./include",
             "-iquote./include/PANS/",
             "-mcpu=cortex-a9",
             "-mfpu=neon-fp16",
@@ -308,7 +273,7 @@
             "-fdiagnostics-color",
             "--std=gnu++17",
             "-o",
-            "C:/Users/Kylen/AppData/Local/Temp/tmpindw8ovi/PANS/UISystem.cpp.o",
+            "C:/Users/Kylen/AppData/Local/Temp/tmpk1frdvbx/PANS/UISystem.cpp.o",
             "src\\PANS\\UISystem.cpp"
         ],
         "directory": "C:\\Kylen\\Robots\\Vex-Tower-Takeover",
@@ -343,11 +308,46 @@
             "-fdiagnostics-color",
             "--std=gnu++17",
             "-o",
-            "C:/Users/Kylen/AppData/Local/Temp/tmpindw8ovi/PANS/Core.cpp.o",
-            "src\\PANS\\Core.cpp"
+            "C:/Users/Kylen/AppData/Local/Temp/tmpk1frdvbx/PANS/VisionSystem.cpp.o",
+            "src\\PANS\\VisionSystem.cpp"
         ],
         "directory": "C:\\Kylen\\Robots\\Vex-Tower-Takeover",
-        "file": "src\\PANS\\Core.cpp"
+        "file": "src\\PANS\\VisionSystem.cpp"
+    },
+    {
+        "arguments": [
+            "clang++",
+            "-c",
+            "-target",
+            "armv7ar-none-none-eabi",
+            "-fno-ms-extensions",
+            "-fno-ms-compatibility",
+            "-fno-delayed-template-parsing",
+            "-isystemc:\\users\\kylen\\appdata\\local\\programs\\pros\\toolchain\\usr\\bin\\../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/include/c++/7.2.1",
+            "-isystemc:\\users\\kylen\\appdata\\local\\programs\\pros\\toolchain\\usr\\bin\\../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/include/c++/7.2.1/arm-none-eabi/thumb/v7-ar/fpv3/softfp",
+            "-isystemc:\\users\\kylen\\appdata\\local\\programs\\pros\\toolchain\\usr\\bin\\../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/include/c++/7.2.1/backward",
+            "-isystemc:\\users\\kylen\\appdata\\local\\programs\\pros\\toolchain\\usr\\bin\\../lib/gcc/arm-none-eabi/7.2.1/include",
+            "-isystemc:\\users\\kylen\\appdata\\local\\programs\\pros\\toolchain\\usr\\bin\\../lib/gcc/arm-none-eabi/7.2.1/include-fixed",
+            "-isystemc:\\users\\kylen\\appdata\\local\\programs\\pros\\toolchain\\usr\\bin\\../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/include",
+            "-iquote./include",
+            "-iquote./include/./",
+            "-mcpu=cortex-a9",
+            "-mfpu=neon-fp16",
+            "-mfloat-abi=softfp",
+            "-D_POSIX_THREADS",
+            "-D_UNIX98_THREAD_MUTEX_ATTRIBUTES",
+            "-Os",
+            "-funwind-tables",
+            "-ffunction-sections",
+            "-fdata-sections",
+            "-fdiagnostics-color",
+            "--std=gnu++17",
+            "-o",
+            "C:/Users/Kylen/AppData/Local/Temp/tmpk1frdvbx/Controllers.cpp.o",
+            "src\\Controllers.cpp"
+        ],
+        "directory": "C:\\Kylen\\Robots\\Vex-Tower-Takeover",
+        "file": "src\\Controllers.cpp"
     },
     {
         "arguments": [
@@ -378,10 +378,10 @@
             "-fdiagnostics-color",
             "--std=gnu++17",
             "-o",
-            "C:/Users/Kylen/AppData/Local/Temp/tmpindw8ovi/PANS/VisionSystem.cpp.o",
-            "src\\PANS\\VisionSystem.cpp"
+            "C:/Users/Kylen/AppData/Local/Temp/tmpk1frdvbx/PANS/Core.cpp.o",
+            "src\\PANS\\Core.cpp"
         ],
         "directory": "C:\\Kylen\\Robots\\Vex-Tower-Takeover",
-        "file": "src\\PANS\\VisionSystem.cpp"
+        "file": "src\\PANS\\Core.cpp"
     }
 ]
