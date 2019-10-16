@@ -74,8 +74,6 @@ void opcontrol()
 			a_arm.moveRelative(-5, 200);
 		}
 
-
-
 		//set motors for mecanum drive
 		float ch1 = master.getAnalog(ControllerAnalog::rightX);
 		float ch4 = master.getAnalog(ControllerAnalog::leftX);
@@ -84,6 +82,7 @@ void opcontrol()
 		c_frontRight.move_voltage(-12000 * (ch3 - ch1 - ch4));
 		c_backLeft.move_voltage(12000 * (ch3 + ch1 - ch4));
 		c_backRight.move_voltage(-12000 * (ch3 - ch1 + ch4));
+		//////////End of testing code//////////
 
 		pros::delay(20);
 	}

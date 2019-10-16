@@ -10,7 +10,14 @@ namespace Core
 
 namespace Motors
 {
-
+  namespace Chassis
+  {
+    //create chassis motors
+    Motor frontLeft(Ports::Chassis::frontLeft);
+    Motor frontRight(Ports::Chassis::frontRight);
+    Motor backLeft(Ports::Chassis::backLeft);
+    Motor backRight(Ports::Chassis::backRight);
+  }
 }
 
 namespace Chassis
