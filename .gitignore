@@ -12,3 +12,4 @@
 common.mk
 temp.log
 compile_commands.json
+bin/_pros_ld_timestamp.o
