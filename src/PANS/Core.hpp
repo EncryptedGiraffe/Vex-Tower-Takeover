@@ -1,6 +1,6 @@
 #ifndef PANS_CORE
 #define PANS_CORE
-#include "api.h"
+#include "../../include/api.h"
 #include <vector>
 #include <deque>
 #include <algorithm>
