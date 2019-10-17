@@ -25,13 +25,6 @@ namespace Ports
 
 namespace Motors
 {
-  namespace Chassis
-  {
-    extern Motor frontLeft;
-    extern Motor frontRight;
-    extern Motor backLeft;
-    extern Motor backRight;
-  }
   namespace Deploy
   {
     extern Motor deploy;
@@ -40,8 +33,7 @@ namespace Motors
 
 namespace Chassis
 {
-  extern std::shared_ptr<ChassisController> controller;
-  //const auto controller = ChassisControllerBuilder().withMotors(1, -10).build();
+  
 }
 
 namespace Deploy
