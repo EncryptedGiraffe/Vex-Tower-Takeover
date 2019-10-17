@@ -2,7 +2,6 @@
 /.vscode
 /.git
 /bin
-/firmware
 /include/display
 /include/pros
 /include/okapi
