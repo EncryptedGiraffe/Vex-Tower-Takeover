@@ -18,7 +18,11 @@ namespace Ports
     const int backRight = 15;
   }
   const int deploy = 12;
-  const int intake = 0;
+  namespace Intake
+  {
+    const int left = 5;
+    const int right = 4;
+  }
 }
 
 namespace Motors
@@ -30,10 +34,8 @@ namespace Motors
     extern Motor backLeft;
     extern Motor backRight;
   }
-  namespace Deploy
-  {
-    extern Motor deploy;
-  }
+  extern Motor deploy;
+  extern MotorGroup intake;
 }
 
 namespace Chassis
@@ -44,7 +46,7 @@ namespace Chassis
 
 namespace Intake
 {
-  extern Motor intake;
+ 
 }
 
 namespace Deploy

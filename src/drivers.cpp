@@ -17,10 +17,8 @@ namespace Motors
     Motor backLeft(Ports::Chassis::backLeft);
     Motor backRight(Ports::Chassis::backRight);
   }
-  namespace Deploy
-  {
-    Motor deploy(Ports::deploy);
-  }
+  Motor deploy(Ports::deploy);
+  MotorGroup intake({Ports::Intake::left, Ports::Intake::right});
 }
 
 namespace Chassis
@@ -36,7 +34,10 @@ namespace Chassis
 
 namespace Intake
 {
-  Motor intake(Ports::intake);
+  //intake state: 1 = forward, 0 = stopped, -1 = backward
+  int state = 0;
+  //intake speed, represented as a decimal percantage from 0.00 (off) to 1.00 (full speed)
+  float speed = 0.00F;
 }
 
 namespace Deploy
