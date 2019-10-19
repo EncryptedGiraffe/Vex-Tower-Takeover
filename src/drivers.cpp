@@ -35,31 +35,50 @@ namespace Chassis
 namespace Intake
 {
   //intake state: 1 = forward, -1 = backward
-  int state = 0;
+  int state = 1;
   //intake mode: 1 = running, 0 = stopped
   int mode = 0;
   //intake speed, represented as a decimal percantage from 0.00 (off) to 1.00 (full speed)
-  float speed = 0.00F;
+  float speed = 1.00F;
   //functions
+  void SetMotor()
+  {
+    Motors::intake.moveVoltage(12000 * mode * state * speed);
+  }
   void Start()
   {
-
+    mode = 1;
+    SetMotor();
   }
   void Stop()
   {
-
+    mode = 0;
+    SetMotor();
   }
   void SetForwards()
   {
-
+    state = 1;
+    SetMotor();
   }
   void SetBackwards()
   {
-
+    state = -1;
+    SetMotor();
   }
   void SetSpeed(float value)
   {
-
+    if (value < 0)
+    {
+      speed = 0.00;
+    }
+    else if (value > 1)
+    {
+      speed = 1.00;
+    }
+    else {
+      speed = value;
+    }
+    SetMotor();
   }
 }
 
