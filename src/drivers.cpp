@@ -34,8 +34,10 @@ namespace Chassis
 
 namespace Intake
 {
-  //intake state: 1 = forward, 0 = stopped, -1 = backward
+  //intake state: 1 = forward, -1 = backward
   int state = 0;
+  //intake mode: 1 = running, 0 = stopped
+  int mode = 0;
   //intake speed, represented as a decimal percantage from 0.00 (off) to 1.00 (full speed)
   float speed = 0.00F;
   //functions
@@ -53,7 +55,11 @@ namespace Intake
   }
   void SetBackwards()
   {
-    
+
+  }
+  void SetSpeed(float value)
+  {
+
   }
 }
 
