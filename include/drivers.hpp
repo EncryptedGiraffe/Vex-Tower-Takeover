@@ -33,7 +33,9 @@ namespace Motors
 
 namespace Chassis
 {
-  
+  void Initialize();
+  //the controller
+  extern std::shared_ptr<ChassisController> controller;
 }
 
 namespace Deploy
