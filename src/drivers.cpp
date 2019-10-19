@@ -38,6 +38,23 @@ namespace Intake
   int state = 0;
   //intake speed, represented as a decimal percantage from 0.00 (off) to 1.00 (full speed)
   float speed = 0.00F;
+  //functions
+  void Start()
+  {
+
+  }
+  void Stop()
+  {
+
+  }
+  void SetForwards()
+  {
+
+  }
+  void SetBackwards()
+  {
+    
+  }
 }
 
 namespace Deploy

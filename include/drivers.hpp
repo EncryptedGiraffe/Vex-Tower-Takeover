@@ -46,7 +46,10 @@ namespace Chassis
 
 namespace Intake
 {
- 
+ void Start();
+ void Stop();
+ void SetForwards();
+ void SetBackwards();
 }
 
 namespace Deploy
