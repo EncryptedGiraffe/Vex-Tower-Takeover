@@ -46,12 +46,12 @@ namespace Chassis
 
 namespace Intake
 {
- void Start();
- void Stop();
- void SetForwards();
- void SetBackwards();
- //speed is a decimal percentage from 0.00 to 1.00
- void SetSpeed(float value);
+  void Start();
+  void Stop();
+  void SetForwards();
+  void SetBackwards();
+  //speed is a decimal percentage from 0.00 to 1.00
+  void SetSpeed(float value);
 }
 
 namespace Deploy
