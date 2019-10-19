@@ -19,7 +19,7 @@ namespace Motors
   }
   namespace Deploy
   {
-    Motor deploy(Ports::Deploy::deploy);
+    Motor deploy(Ports::deploy);
   }
 }
 
@@ -32,6 +32,11 @@ namespace Chassis
   .withDimensions({{4_in, 14.25_in}, imev5GreenTPR})
   .build();
   */
+}
+
+namespace Intake
+{
+  Motor intake(Ports::intake);
 }
 
 namespace Deploy

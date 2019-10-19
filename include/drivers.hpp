@@ -17,10 +17,8 @@ namespace Ports
     const int backLeft = 14;
     const int backRight = 15;
   }
-  namespace Deploy
-  {
-    const int deploy = 12;
-  }
+  const int deploy = 12;
+  const int intake = 0;
 }
 
 namespace Motors
@@ -42,6 +40,11 @@ namespace Chassis
 {
   extern std::shared_ptr<ChassisController> controller;
   //const auto controller = ChassisControllerBuilder().withMotors(1, -10).build();
+}
+
+namespace Intake
+{
+  extern Motor intake;
 }
 
 namespace Deploy
