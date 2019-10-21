@@ -12,11 +12,13 @@ void autonomous() {}
 //state variables
 bool isIntakeRunning = false;
 bool isDriveSlow = true;
+bool isDeployed = false;
 
 //buttons
 ControllerButton intakeToggle(ControllerDigital::R1);
 ControllerButton intakeReverse(ControllerDigital::R2);
 ControllerButton driveSpeedToggle(ControllerDigital::B);
+ControllerButton deployToggle(ControllerDigital::Y);
 
 //drive variables
 float ch1;
@@ -51,8 +53,22 @@ void opcontrol()
 		{
 			Intake::SetForwards();
 		}
+		//deploy
+		if(deployToggle.changedToPressed())
+		{
+			if(isDeployed)
+			{
+				Deploy::Move(0.00F);
+				isDeployed = false;
+			}
+			else
+			{
+				Deploy::Move(1.00F);
+				isDeployed = true;
+			}
+		}
 		//drive speed
-		if(driveSpeedToggle.changedToReleased())
+		if(driveSpeedToggle.changedToPressed())
 		{
 			if(isDriveSlow)
 			{
