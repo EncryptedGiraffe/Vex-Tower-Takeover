@@ -17,7 +17,7 @@ namespace Motors
     Motor backRight(Ports::Chassis::backRight);
   }
   Motor deploy(Ports::deploy);
-  MotorGroup intake({Ports::Intake::left, Ports::Intake::right});
+  MotorGroup intake({Ports::Intake::left, -Ports::Intake::right});
 }
 
 namespace Chassis
