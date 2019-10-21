@@ -11,16 +11,18 @@ void autonomous() {}
 
 //state variables
 bool isIntakeRunning = false;
+bool isDriveSlow = true;
 
 //buttons
 ControllerButton intakeToggle(ControllerDigital::R1);
 ControllerButton intakeReverse(ControllerDigital::R2);
+ControllerButton driveSpeedToggle(ControllerDigital::B);
 
 //drive variables
 float ch1;
 float ch3;
 float ch4;
-float driveSpeed = 1.00;
+float driveSpeed = 0.50;
 
 void opcontrol()
 {
@@ -48,6 +50,20 @@ void opcontrol()
 		else
 		{
 			Intake::SetForwards();
+		}
+		//drive speed
+		if(driveSpeedToggle.changedToReleased())
+		{
+			if(isDriveSlow)
+			{
+				isDriveSlow = false;
+				driveSpeed = 1.00;
+			}
+			else
+			{
+				isDriveSlow = true;
+				driveSpeed = 0.50;
+			}
 		}
 		//open-loop drive control
 		ch1 = Core::master.getAnalog(ControllerAnalog::rightX);
