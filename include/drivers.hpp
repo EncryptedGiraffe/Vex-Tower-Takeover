@@ -40,8 +40,9 @@ namespace Motors
 
 namespace Chassis
 {
+  void Initialize();
+  //the controller
   extern std::shared_ptr<ChassisController> controller;
-  //const auto controller = ChassisControllerBuilder().withMotors(1, -10).build();
 }
 
 namespace Deploy
