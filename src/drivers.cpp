@@ -9,6 +9,13 @@ namespace Core
 
 namespace Motors
 {
+  namespace Chassis
+  {
+    Motor frontLeft(Ports::Chassis::frontLeft);
+    Motor frontRight(Ports::Chassis::frontRight);
+    Motor backLeft(Ports::Chassis::backLeft);
+    Motor backRight(Ports::Chassis::backRight);
+  }
   namespace Deploy
   {
     Motor deploy(Ports::Deploy::deploy);
@@ -24,7 +31,7 @@ namespace Chassis
   {
     //create the controller
     controller = ChassisControllerBuilder()
-    .withMotors(Ports::Chassis::frontLeft, -Ports::Chassis::frontRight, Ports::Chassis::backLeft, -Ports::Chassis::backRight)
+    .withMotors(Ports::Chassis::frontLeft, -Ports::Chassis::frontRight, -Ports::Chassis::backRight, Ports::Chassis::backLeft)
     .withGearset(AbstractMotor::gearset::green)
     .withDimensions({{4_in, 14.25_in}, imev5GreenTPR})
     .build();

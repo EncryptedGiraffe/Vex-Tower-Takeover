@@ -25,6 +25,13 @@ namespace Ports
 
 namespace Motors
 {
+  namespace Chassis
+  {
+    extern Motor frontLeft;
+    extern Motor frontRight;
+    extern Motor backLeft;
+    extern Motor backRight;
+  }
   namespace Deploy
   {
     extern Motor deploy;
