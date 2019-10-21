@@ -9,7 +9,14 @@ void disabled() {}
 void competition_initialize() {}
 void autonomous() {}
 
-//variables
+//state variables
+bool isIntakeRunning = false;
+
+//buttons
+ControllerButton intakeToggle(ControllerDigital::R1);
+ControllerButton intakeReverse(ControllerDigital::R2);
+
+//drive variables
 float ch1;
 float ch3;
 float ch4;
@@ -20,6 +27,28 @@ void opcontrol()
 	PANS::UISystem::MessageBrain("Opcontrol starting");
 	while (true)
 	{
+		//intake controller
+		if (intakeToggle.changedToPressed())
+		{
+			if(isIntakeRunning)
+			{
+				Intake::Stop();
+				isIntakeRunning = false;
+			}
+			else
+			{
+				Intake::Start();
+				isIntakeRunning = true;
+			}
+		}
+		if (intakeReverse.isPressed())
+		{
+			Intake::SetBackwards();
+		}
+		else
+		{
+			Intake::SetForwards();
+		}
 		//open-loop drive control
 		ch1 = Core::master.getAnalog(ControllerAnalog::rightX);
 		ch3 = Core::master.getAnalog(ControllerAnalog::leftY);

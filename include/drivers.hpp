@@ -17,9 +17,11 @@ namespace Ports
     const int backLeft = 14;
     const int backRight = 15;
   }
-  namespace Deploy
+  const int deploy = 12;
+  namespace Intake
   {
-    const int deploy = 12;
+    const int left = 5;
+    const int right = 4;
   }
 }
 
@@ -32,10 +34,8 @@ namespace Motors
     extern Motor backLeft;
     extern Motor backRight;
   }
-  namespace Deploy
-  {
-    extern Motor deploy;
-  }
+  extern Motor deploy;
+  extern MotorGroup intake;
 }
 
 namespace Chassis
@@ -43,6 +43,16 @@ namespace Chassis
   void Initialize();
   //the controller
   extern std::shared_ptr<ChassisController> controller;
+}
+
+namespace Intake
+{
+  void Start();
+  void Stop();
+  void SetForwards();
+  void SetBackwards();
+  //speed is a decimal percentage from 0.00 to 1.00
+  void SetSpeed(float value);
 }
 
 namespace Deploy
