@@ -57,7 +57,11 @@ namespace Intake
 
 namespace Deploy
 {
-
+  //bounds
+  const int finalPosition = 5600;
+  const int maxSpeed = 100;
+  //percent is a decimal percentage of the deploy system's total movement
+  void Move(float percent);
 }
 
 #endif

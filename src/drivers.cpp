@@ -95,5 +95,20 @@ namespace Intake
 
 namespace Deploy
 {
-
+  //percent is a decimal percentage of the deploy system's total movement
+  void Move(float percent)
+  {
+    float per;
+    //check percent
+    if(percent > 1.00)
+      per = 1.00;
+    else if(percent < 0.00)
+      per = 0.00;
+    else
+      per = percent;
+    //calculate new position
+    int pos = per * finalPosition;
+    //set the motor
+    Motors::deploy.moveAbsolute(-pos, maxSpeed);
+  }
 }
