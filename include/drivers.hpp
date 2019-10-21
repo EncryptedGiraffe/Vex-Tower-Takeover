@@ -23,6 +23,7 @@ namespace Ports
     const int left = 5;
     const int right = 4;
   }
+  const int arm = 3;
 }
 
 namespace Motors
@@ -36,6 +37,7 @@ namespace Motors
   }
   extern Motor deploy;
   extern MotorGroup intake;
+  extern Motor arm;
 }
 
 namespace Chassis
@@ -60,8 +62,19 @@ namespace Deploy
   //bounds
   const int finalPosition = 5600;
   const int maxSpeed = 100;
+  //get the position of the ramp
+  int GetPosition();
   //percent is a decimal percentage of the deploy system's total movement
   void Move(float percent);
+}
+
+namespace Arm
+{
+  //bounds
+  const int maxHeight = 1000;
+  const int maxSpeed = 200;
+  //set the position of the arm
+  void SetPosition(int pos);
 }
 
 #endif
