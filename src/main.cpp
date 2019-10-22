@@ -4,13 +4,14 @@ void initialize()
 {
 	PANS::Core::Initialize();
 	Chassis::Initialize();
+	Arm::Initialize();
 }
 void disabled() {}
 void competition_initialize() {}
 void autonomous() {}
 
 //opcontrol constants
-const int arm_increment = 20;
+const int arm_increment = 30;
 
 //opcontrol state variables
 bool isIntakeRunning = false;
@@ -48,7 +49,6 @@ void ArmBounds()
 void opcontrol()
 {
 	PANS::UISystem::MessageBrain("Opcontrol starting");
-	auto liftControl = AsyncPosControllerBuilder().withMotor(Ports::arm).build();
 	while (true)
 	{
 		//intake controller
@@ -90,26 +90,16 @@ void opcontrol()
 		if(armUp.isPressed())
 		{
 			arm_pos += arm_increment;
-			//Arm::SetPosition(arm_pos);
-			//Motors::arm.moveAbsolute(arm_pos, 200);
-			//ArmBounds();
-			liftControl->setTarget(arm_pos);
+			ArmBounds();
+			Arm::SetPosition(arm_pos);
 			PANS::UISystem::MessageBrain(std::to_string(arm_pos));
-			//Motors::arm.moveVoltage(12000);
 		}
 		else if(armDown.isPressed())
 		{
 			arm_pos -= arm_increment;
-			//Arm::SetPosition(arm_pos);
-			//ArmBounds();
-			liftControl->setTarget(arm_pos);
-			//Motors::arm.moveAbsolute(arm_pos, 200);
+			ArmBounds();
+			Arm::SetPosition(arm_pos);
 			PANS::UISystem::MessageBrain(std::to_string(arm_pos));
-			//Motors::arm.moveVoltage(-12000);
-		}
-		else
-		{
-			//Motors::arm.moveVoltage(0);
 		}
 		//drive speed
 		if(driveSpeedToggle.changedToPressed())

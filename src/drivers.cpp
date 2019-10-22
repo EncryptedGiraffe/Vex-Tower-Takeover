@@ -100,7 +100,7 @@ namespace Deploy
   //get the position of the ramp
   int GetPosition()
   {
-    return cur_pos;
+    return cur_pos / finalPosition;
   }
   //percent is a decimal percentage of the deploy system's total movement
   void Move(float percent)
@@ -122,6 +122,13 @@ namespace Deploy
 
 namespace Arm
 {
+  std::shared_ptr<AsyncPositionController<double, double>> controller;
+  void Initialize()
+  {
+    controller = AsyncPosControllerBuilder()
+    .withMotor(Ports::arm)
+    .build();
+  }
   int cur_pos = 0;
   //set the position of the arm
   void SetPosition(int pos)
@@ -140,6 +147,6 @@ namespace Arm
       cur_pos = pos;
     }
     //set the motor
-    Motors::arm.moveAbsolute(-cur_pos, maxSpeed);
+    controller->setTarget(cur_pos);
   }
 }

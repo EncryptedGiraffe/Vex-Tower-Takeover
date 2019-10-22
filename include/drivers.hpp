@@ -70,9 +70,15 @@ namespace Deploy
 
 namespace Arm
 {
+  void Initialize();
+  //arm position controller
+  extern std::shared_ptr<AsyncPositionController<double, double>> controller;
   //bounds
-  const int maxHeight = 1000;
+  const int maxHeight = 4000;
   const int maxSpeed = 200;
+  //tower heights
+  const int lowTower = 0;
+  const int highTower = 0;
   //set the position of the arm
   void SetPosition(int pos);
 }
