@@ -18,6 +18,7 @@ namespace Motors
   }
   Motor deploy(Ports::deploy);
   MotorGroup intake({Ports::Intake::left, -Ports::Intake::right});
+  Motor arm(Ports::arm);
 }
 
 namespace Chassis
@@ -95,6 +96,12 @@ namespace Intake
 
 namespace Deploy
 {
+  int cur_pos = 0;
+  //get the position of the ramp
+  int GetPosition()
+  {
+    return cur_pos / finalPosition;
+  }
   //percent is a decimal percentage of the deploy system's total movement
   void Move(float percent)
   {
@@ -107,8 +114,39 @@ namespace Deploy
     else
       per = percent;
     //calculate new position
-    int pos = per * finalPosition;
+    cur_pos = per * finalPosition;
     //set the motor
-    Motors::deploy.moveAbsolute(-pos, maxSpeed);
+    Motors::deploy.moveAbsolute(-cur_pos, maxSpeed);
+  }
+}
+
+namespace Arm
+{
+  std::shared_ptr<AsyncPositionController<double, double>> controller;
+  void Initialize()
+  {
+    controller = AsyncPosControllerBuilder()
+    .withMotor(Ports::arm)
+    .build();
+  }
+  int cur_pos = 0;
+  //set the position of the arm
+  void SetPosition(int pos)
+  {
+    //check bounds
+    if(pos < 0)
+    {
+      cur_pos = 0;
+    }
+    else if(pos > maxHeight)
+    {
+      cur_pos = maxHeight;
+    }
+    else
+    {
+      cur_pos = pos;
+    }
+    //set the motor
+    controller->setTarget(cur_pos);
   }
 }

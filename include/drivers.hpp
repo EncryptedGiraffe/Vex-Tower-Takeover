@@ -20,9 +20,10 @@ namespace Ports
   const int deploy = 12;
   namespace Intake
   {
-    const int left = 5;
-    const int right = 4;
+    const int left = 7;
+    const int right = 6;
   }
+  const int arm = 3;
 }
 
 namespace Motors
@@ -36,6 +37,7 @@ namespace Motors
   }
   extern Motor deploy;
   extern MotorGroup intake;
+  extern Motor arm;
 }
 
 namespace Chassis
@@ -60,8 +62,25 @@ namespace Deploy
   //bounds
   const int finalPosition = 5600;
   const int maxSpeed = 100;
+  //get the position of the ramp
+  int GetPosition();
   //percent is a decimal percentage of the deploy system's total movement
   void Move(float percent);
+}
+
+namespace Arm
+{
+  void Initialize();
+  //arm position controller
+  extern std::shared_ptr<AsyncPositionController<double, double>> controller;
+  //bounds
+  const int maxHeight = 4500;
+  const int maxSpeed = 200;
+  //tower heights
+  const int lowTower = 2000;
+  const int highTower = 4200;
+  //set the position of the arm
+  void SetPosition(int pos);
 }
 
 #endif

@@ -4,27 +4,57 @@ void initialize()
 {
 	PANS::Core::Initialize();
 	Chassis::Initialize();
+	Arm::Initialize();
 }
 void disabled() {}
 void competition_initialize() {}
 void autonomous() {}
 
-//state variables
+//opcontrol constants
+const int arm_increment = 30;
+
+//opcontrol state variables
 bool isIntakeRunning = false;
 bool isDriveSlow = true;
 bool isDeployed = false;
+int arm_pos = 0;
 
 //buttons
 ControllerButton intakeToggle(ControllerDigital::R1);
 ControllerButton intakeReverse(ControllerDigital::R2);
-ControllerButton driveSpeedToggle(ControllerDigital::B);
+ControllerButton driveSpeedToggle(ControllerDigital::X);
 ControllerButton deployToggle(ControllerDigital::Y);
+ControllerButton armUp(ControllerDigital::L1);
+ControllerButton armDown(ControllerDigital::L2);
+ControllerButton deployMid(ControllerDigital::B);
+ControllerButton highTower(ControllerDigital::up);
+ControllerButton lowTower(ControllerDigital::left);
+ControllerButton armBottom(ControllerDigital::down);
 
 //drive variables
 float ch1;
 float ch3;
 float ch4;
 float driveSpeed = 0.50;
+
+//opcontrol functions
+void ArmBounds()
+{
+	if(arm_pos < 0)
+	{
+		arm_pos = 0;
+	}
+	else if(arm_pos > Arm::maxHeight)
+	{
+		arm_pos = Arm::maxHeight;
+	}
+}
+
+void SetDeployMiddle()
+{
+	isDeployed = true;
+	Deploy::Move(0.50F);
+}
 
 void opcontrol()
 {
@@ -66,6 +96,38 @@ void opcontrol()
 				Deploy::Move(1.00F);
 				isDeployed = true;
 			}
+		}
+		if(deployMid.changedToPressed())
+		{
+			SetDeployMiddle();
+		}
+		//arm control
+		if(armUp.isPressed())
+		{
+			arm_pos += arm_increment;
+			ArmBounds();
+			Arm::SetPosition(arm_pos);
+		}
+		else if(armDown.isPressed())
+		{
+			arm_pos -= arm_increment;
+			ArmBounds();
+			Arm::SetPosition(arm_pos);
+		}
+		if(lowTower.changedToPressed())
+		{
+			arm_pos = Arm::lowTower;
+			Arm::SetPosition(arm_pos);
+		}
+		if(highTower.changedToPressed())
+		{
+			arm_pos = Arm::highTower;
+			Arm::SetPosition(arm_pos);
+		}
+		if(armBottom.changedToPressed())
+		{
+			arm_pos = 0;
+			Arm::SetPosition(arm_pos);
 		}
 		//drive speed
 		if(driveSpeedToggle.changedToPressed())
