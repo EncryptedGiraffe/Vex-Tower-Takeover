@@ -22,10 +22,14 @@ int arm_pos = 0;
 //buttons
 ControllerButton intakeToggle(ControllerDigital::R1);
 ControllerButton intakeReverse(ControllerDigital::R2);
-ControllerButton driveSpeedToggle(ControllerDigital::B);
+ControllerButton driveSpeedToggle(ControllerDigital::X);
 ControllerButton deployToggle(ControllerDigital::Y);
 ControllerButton armUp(ControllerDigital::L1);
 ControllerButton armDown(ControllerDigital::L2);
+ControllerButton deployMid(ControllerDigital::B);
+ControllerButton highTower(ControllerDigital::up);
+ControllerButton lowTower(ControllerDigital::left);
+ControllerButton armBottom(ControllerDigital::down);
 
 //drive variables
 float ch1;
@@ -44,6 +48,12 @@ void ArmBounds()
 	{
 		arm_pos = Arm::maxHeight;
 	}
+}
+
+void SetDeployMiddle()
+{
+	isDeployed = true;
+	Deploy::Move(0.50F);
 }
 
 void opcontrol()
@@ -87,19 +97,37 @@ void opcontrol()
 				isDeployed = true;
 			}
 		}
+		if(deployMid.changedToPressed())
+		{
+			SetDeployMiddle();
+		}
+		//arm control
 		if(armUp.isPressed())
 		{
 			arm_pos += arm_increment;
 			ArmBounds();
 			Arm::SetPosition(arm_pos);
-			PANS::UISystem::MessageBrain(std::to_string(arm_pos));
 		}
 		else if(armDown.isPressed())
 		{
 			arm_pos -= arm_increment;
 			ArmBounds();
 			Arm::SetPosition(arm_pos);
-			PANS::UISystem::MessageBrain(std::to_string(arm_pos));
+		}
+		if(lowTower.changedToPressed())
+		{
+			arm_pos = Arm::lowTower;
+			Arm::SetPosition(arm_pos);
+		}
+		if(highTower.changedToPressed())
+		{
+			arm_pos = Arm::highTower;
+			Arm::SetPosition(arm_pos);
+		}
+		if(armBottom.changedToPressed())
+		{
+			arm_pos = 0;
+			Arm::SetPosition(arm_pos);
 		}
 		//drive speed
 		if(driveSpeedToggle.changedToPressed())
