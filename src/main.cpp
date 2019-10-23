@@ -5,6 +5,7 @@ void initialize()
 	PANS::Core::Initialize();
 	Chassis::Initialize();
 	Arm::Initialize();
+	Deploy::Initialize();
 }
 void disabled() {}
 void competition_initialize() {}
@@ -30,6 +31,7 @@ ControllerButton deployMid(ControllerDigital::B);
 ControllerButton highTower(ControllerDigital::up);
 ControllerButton lowTower(ControllerDigital::left);
 ControllerButton armBottom(ControllerDigital::down);
+ControllerButton deployTrigger(ControllerDigital::A);
 
 //drive variables
 float ch1;
@@ -71,17 +73,21 @@ void opcontrol()
 			}
 			else
 			{
+				Intake::SetSpeed(1.0);
 				Intake::Start();
 				isIntakeRunning = true;
 			}
 		}
-		if (intakeReverse.isPressed())
+		if (intakeReverse.changedToPressed())
 		{
 			Intake::SetBackwards();
+			Intake::SetSpeed(1.0);
+			Intake::Start();
 		}
-		else
+		else if(intakeReverse.changedToReleased())
 		{
 			Intake::SetForwards();
+			Intake::Stop();
 		}
 		//deploy
 		if(deployToggle.changedToPressed())
@@ -101,6 +107,10 @@ void opcontrol()
 		{
 			SetDeployMiddle();
 		}
+		if(deployTrigger.changedToPressed())
+		{
+			Deploy::Deploy();
+		}
 		//arm control
 		if(armUp.isPressed())
 		{
@@ -116,11 +126,17 @@ void opcontrol()
 		}
 		if(lowTower.changedToPressed())
 		{
+			Deploy::Move(0.50F);
+			isDeployed = true;
+			pros::delay(500);
 			arm_pos = Arm::lowTower;
 			Arm::SetPosition(arm_pos);
 		}
 		if(highTower.changedToPressed())
 		{
+			Deploy::Move(0.50F);
+			isDeployed = true;
+			pros::delay(500);
 			arm_pos = Arm::highTower;
 			Arm::SetPosition(arm_pos);
 		}

@@ -118,6 +118,100 @@ namespace Deploy
     //set the motor
     Motors::deploy.moveAbsolute(-cur_pos, maxSpeed);
   }
+  //task state variables
+  bool isDeploying = false;
+  bool isFinished = false;
+
+  //internal async deploy sequence
+  void _deploy(void* param)
+  {
+    while(true)
+    {
+      if(isDeploying)
+      {
+        //move the intake
+        Intake::SetBackwards();
+        Intake::SetSpeed(0.4);
+        Intake::Start();
+        pros::Task::delay(200);
+        if(!isDeploying) //check for abort
+          continue;
+        //move the intake
+        Intake::SetSpeed(0.1);
+        //move the ramp
+        Deploy::Move(1.0F);
+        pros::Task::delay(3300);
+        if(!isDeploying) //check for abort
+          continue;
+        //move intake
+        Intake::SetSpeed(0.8);
+        Intake::SetForwards();
+        //move forwards
+        Motors::Chassis::frontLeft.moveVoltage(2000);
+        Motors::Chassis::frontRight.moveVoltage(-2000);
+        Motors::Chassis::backLeft.moveVoltage(2000);
+        Motors::Chassis::backRight.moveVoltage(-2000);
+        pros::Task::delay(700);
+        if(!isDeploying) //check for abort
+          continue;
+        //move the intake
+        Intake::SetBackwards();
+        Intake::SetSpeed(0.4);
+        Intake::Start();
+        //move the deploy
+        Deploy::Move(0.00F);
+        //move backwards
+        Motors::Chassis::frontLeft.moveVoltage(-2000);
+        Motors::Chassis::frontRight.moveVoltage(2000);
+        Motors::Chassis::backLeft.moveVoltage(-2000);
+        Motors::Chassis::backRight.moveVoltage(2000);
+        pros::Task::delay(4000);
+        if(!isDeploying) //check for abort
+          continue;
+        Deploy::Move(0.0F);
+        Intake::SetForwards();
+        Intake::SetSpeed(1.00);
+        Intake::Stop();
+        //finish
+        isDeploying = false;
+        isFinished = true;
+      }
+      else
+      {
+        pros::Task::delay(20);
+      }
+    }
+  }
+  //run the deploy sequence
+  void Deploy()
+  {
+    //start the sequence
+    isDeploying = true;
+    isFinished = false;
+    Deploy::Move(0.00F);
+    Arm::SetPosition(0);
+    while(true)
+    {
+      //check if finished
+      if(isFinished)
+      {
+        isDeploying = false;
+        isFinished = false;
+        break;
+      }
+      if(Core::master.getDigital(ControllerDigital::X))
+      {
+        isDeploying = false;
+        isFinished = false;
+        break;
+      }
+      pros::delay(20);
+    }
+  }
+  void Initialize()
+  {
+    pros::Task deploy_task(_deploy, (void*)"", TASK_PRIORITY_DEFAULT, TASK_STACK_DEPTH_DEFAULT, "Deploy Task");
+  }
 }
 
 namespace Arm

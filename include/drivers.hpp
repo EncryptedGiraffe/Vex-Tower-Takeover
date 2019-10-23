@@ -20,8 +20,8 @@ namespace Ports
   const int deploy = 12;
   namespace Intake
   {
-    const int left = 7;
-    const int right = 6;
+    const int left = 8;
+    const int right = 9;
   }
   const int arm = 3;
 }
@@ -66,6 +66,10 @@ namespace Deploy
   int GetPosition();
   //percent is a decimal percentage of the deploy system's total movement
   void Move(float percent);
+  //run the deploy sequence
+  void Deploy();
+  //initialize
+  void Initialize();
 }
 
 namespace Arm
@@ -77,8 +81,8 @@ namespace Arm
   const int maxHeight = 4500;
   const int maxSpeed = 200;
   //tower heights
-  const int lowTower = 2000;
-  const int highTower = 4200;
+  const int lowTower = 2700;
+  const int highTower = 4000;
   //set the position of the arm
   void SetPosition(int pos);
 }
