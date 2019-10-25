@@ -25,14 +25,34 @@ void competition_initialize()
 
 void autonomous()
 {
-	Core::Initialize();
+	// Core::Initialize();
 	if(isAutoRed)
 	{
-		
+
 	}
 	else
 	{
-
+		//////////Legal but kinda not autonomous routine//////////
+		//start with preload angled in goal zone
+		//deploy
+		Core::Initialize();
+		//slurp up line of four cubes
+		Intake::SetForwards();
+		Intake::SetSpeed(1.00F);
+		Intake::Start();
+		Motors::Chassis::frontLeft.moveVoltage(5000);
+    Motors::Chassis::frontRight.moveVoltage(-5000);
+    Motors::Chassis::backLeft.moveVoltage(5000);
+    Motors::Chassis::backRight.moveVoltage(-5000);
+		pros::delay(1800);
+		Motors::Chassis::frontLeft.moveVoltage(0);
+    Motors::Chassis::frontRight.moveVoltage(0);
+    Motors::Chassis::backLeft.moveVoltage(0);
+    Motors::Chassis::backRight.moveVoltage(0);
+		pros::delay(500);
+		//intake off
+		Intake::Stop();
+		//////////End of legal but kinda not autonomous routine//////////
 	}
 }
 
