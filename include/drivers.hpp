@@ -6,6 +6,8 @@ namespace Core
 {
   extern Controller master;
   extern Controller partner;
+  extern int isInitialized;
+  void Initialize();
 }
 
 namespace Ports
@@ -60,7 +62,7 @@ namespace Intake
 namespace Deploy
 {
   //bounds
-  const int finalPosition = 5600;
+  const int finalPosition = 5800;
   const int maxSpeed = 100;
   //get the position of the ramp
   int GetPosition();

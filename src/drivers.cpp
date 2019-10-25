@@ -5,6 +5,57 @@ namespace Core
   //create the controllers
   Controller master(ControllerId::master);
   Controller partner(ControllerId::partner);
+  int isInitialized = false;
+  void Initialize()
+  {
+    if(isInitialized)
+      return;
+    //move forwards
+    Motors::Chassis::frontLeft.moveVoltage(7000);
+    Motors::Chassis::frontRight.moveVoltage(-7000);
+    Motors::Chassis::backLeft.moveVoltage(7000);
+    Motors::Chassis::backRight.moveVoltage(-7000);
+    pros::delay(400);
+    //move backward
+    Motors::Chassis::frontLeft.moveVoltage(-7000);
+    Motors::Chassis::frontRight.moveVoltage(7000);
+    Motors::Chassis::backLeft.moveVoltage(-7000);
+    Motors::Chassis::backRight.moveVoltage(7000);
+    pros::delay(400);
+    //move backwards
+    Motors::Chassis::frontLeft.moveVoltage(0);
+    Motors::Chassis::frontRight.moveVoltage(0);
+    Motors::Chassis::backLeft.moveVoltage(0);
+    Motors::Chassis::backRight.moveVoltage(0);
+    //deploy up
+    Deploy::Move(0.30);
+    pros::delay(500);
+    //arm up
+    Arm::SetPosition(800);
+    pros::delay(500);
+    //arm down
+    Arm::SetPosition(0);
+    //deploy down
+    Deploy::Move(0.00);
+    isInitialized = true;
+  }
+}
+
+namespace Auto
+{
+  void RedAuto()
+  {
+    //drive forwards to slurp up
+    Motors::Chassis::frontLeft.moveVoltage(6000);
+    Motors::Chassis::frontRight.moveVoltage(-6000);
+    Motors::Chassis::backLeft.moveVoltage(6000);
+    Motors::Chassis::backRight.moveVoltage(-6000);
+    pros::Task::delay(500);
+  }
+  void BlueAuto()
+  {
+
+  }
 }
 
 namespace Motors
@@ -131,9 +182,9 @@ namespace Deploy
       {
         //move the intake
         Intake::SetBackwards();
-        Intake::SetSpeed(0.4);
+        Intake::SetSpeed(0.5);
         Intake::Start();
-        pros::Task::delay(200);
+        pros::Task::delay(80);
         if(!isDeploying) //check for abort
           continue;
         //move the intake
@@ -144,34 +195,37 @@ namespace Deploy
         if(!isDeploying) //check for abort
           continue;
         //move intake
-        Intake::SetSpeed(0.8);
+        Intake::SetSpeed(0.7);
         Intake::SetForwards();
         //move forwards
-        Motors::Chassis::frontLeft.moveVoltage(2000);
-        Motors::Chassis::frontRight.moveVoltage(-2000);
-        Motors::Chassis::backLeft.moveVoltage(2000);
-        Motors::Chassis::backRight.moveVoltage(-2000);
-        pros::Task::delay(700);
+        Motors::Chassis::frontLeft.moveVoltage(1000);
+        Motors::Chassis::frontRight.moveVoltage(-1000);
+        Motors::Chassis::backLeft.moveVoltage(1000);
+        Motors::Chassis::backRight.moveVoltage(-1000);
+        pros::Task::delay(800);
         if(!isDeploying) //check for abort
           continue;
         //move the intake
         Intake::SetBackwards();
         Intake::SetSpeed(0.4);
         Intake::Start();
+        pros::delay(1300);
         //move the deploy
         Deploy::Move(0.00F);
+        pros::delay(1500);
         //move backwards
         Motors::Chassis::frontLeft.moveVoltage(-2000);
         Motors::Chassis::frontRight.moveVoltage(2000);
         Motors::Chassis::backLeft.moveVoltage(-2000);
         Motors::Chassis::backRight.moveVoltage(2000);
-        pros::Task::delay(4000);
+        pros::Task::delay(3000);
         if(!isDeploying) //check for abort
           continue;
         Deploy::Move(0.0F);
         Intake::SetForwards();
         Intake::SetSpeed(1.00);
         Intake::Stop();
+        Arm::controller->setTarget(0);
         //finish
         isDeploying = false;
         isFinished = true;

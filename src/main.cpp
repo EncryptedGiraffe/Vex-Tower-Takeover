@@ -8,8 +8,33 @@ void initialize()
 	Deploy::Initialize();
 }
 void disabled() {}
-void competition_initialize() {}
-void autonomous() {}
+
+bool isAutoRed = false;
+void SetBlueAuto()
+{
+	isAutoRed = true;
+}
+void SetRedAuto()
+{
+	isAutoRed = false;
+}
+void competition_initialize()
+{
+	PANS::UISystem::ConfigDialog("Select team:", "Red", SetRedAuto, "Blue", SetBlueAuto);
+}
+
+void autonomous()
+{
+	Core::Initialize();
+	if(isAutoRed)
+	{
+		
+	}
+	else
+	{
+
+	}
+}
 
 //opcontrol constants
 const int arm_increment = 30;
@@ -61,6 +86,7 @@ void SetDeployMiddle()
 void opcontrol()
 {
 	PANS::UISystem::MessageBrain("Opcontrol starting");
+	Core::Initialize();
 	while (true)
 	{
 		//intake controller
