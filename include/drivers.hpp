@@ -68,8 +68,10 @@ namespace Deploy
   int GetPosition();
   //percent is a decimal percentage of the deploy system's total movement
   void Move(float percent);
-  //run the deploy sequence
+  //run the deploy sequence for the small goal
   void Deploy();
+  //run the deploy sequence for the wide goal
+  void DeployWide();
   //initialize
   void Initialize();
 }
