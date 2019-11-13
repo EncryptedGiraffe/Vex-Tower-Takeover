@@ -5,10 +5,88 @@ void initialize()
 	PANS::Core::Initialize();
 	Chassis::Initialize();
 	Arm::Initialize();
+	Deploy::Initialize();
 }
 void disabled() {}
-void competition_initialize() {}
-void autonomous() {}
+
+bool isAutoRed = false;
+void SetBlueAuto()
+{
+	isAutoRed = false;
+}
+void SetRedAuto()
+{
+	isAutoRed = true;
+}
+void competition_initialize()
+{
+	PANS::UISystem::ConfigDialog("Select team:", "Red", SetRedAuto, "Blue", SetBlueAuto);
+}
+
+void autonomous()
+{
+	// Core::Initialize();
+	if(isAutoRed)
+	{
+		//////////Legal but kinda not autonomous routine//////////
+		//start with preload angled in goal zone
+		//deploy
+		Core::Initialize();
+		//slurp up line of four cubes
+		Intake::SetForwards();
+		Intake::SetSpeed(1.00F);
+		Intake::Start();
+		Motors::Chassis::frontLeft.moveVoltage(-5000);
+		Motors::Chassis::frontRight.moveVoltage(-5000);
+		Motors::Chassis::backLeft.moveVoltage(5000);
+		Motors::Chassis::backRight.moveVoltage(5000);
+		pros::delay(2000);
+		//forward
+		Motors::Chassis::frontLeft.moveVoltage(5000);
+		Motors::Chassis::frontRight.moveVoltage(-5000);
+		Motors::Chassis::backLeft.moveVoltage(5000);
+		Motors::Chassis::backRight.moveVoltage(-5000);
+		pros::delay(1800);
+		Motors::Chassis::frontLeft.moveVoltage(0);
+		Motors::Chassis::frontRight.moveVoltage(0);
+		Motors::Chassis::backLeft.moveVoltage(0);
+		Motors::Chassis::backRight.moveVoltage(0);
+		pros::delay(500);
+		//intake off
+		Intake::Stop();
+		//////////End of legal but kinda not autonomous routine//////////
+	}
+	else
+	{
+		//////////Legal but kinda not autonomous routine//////////
+		//start with preload angled in goal zone
+		//deploy
+		Core::Initialize();
+		//slurp up line of four cubes
+		Intake::SetForwards();
+		Intake::SetSpeed(1.00F);
+		Intake::Start();
+		Motors::Chassis::frontLeft.moveVoltage(5000);
+    Motors::Chassis::frontRight.moveVoltage(5000);
+    Motors::Chassis::backLeft.moveVoltage(-5000);
+    Motors::Chassis::backRight.moveVoltage(-5000);
+		pros::delay(2000);
+		//forward
+		Motors::Chassis::frontLeft.moveVoltage(5000);
+    Motors::Chassis::frontRight.moveVoltage(-5000);
+    Motors::Chassis::backLeft.moveVoltage(5000);
+    Motors::Chassis::backRight.moveVoltage(-5000);
+		pros::delay(1800);
+		Motors::Chassis::frontLeft.moveVoltage(0);
+    Motors::Chassis::frontRight.moveVoltage(0);
+    Motors::Chassis::backLeft.moveVoltage(0);
+    Motors::Chassis::backRight.moveVoltage(0);
+		pros::delay(500);
+		//intake off
+		Intake::Stop();
+		//////////End of legal but kinda not autonomous routine//////////
+	}
+}
 
 //opcontrol constants
 const int arm_increment = 30;
@@ -30,6 +108,7 @@ ControllerButton deployMid(ControllerDigital::B);
 ControllerButton highTower(ControllerDigital::up);
 ControllerButton lowTower(ControllerDigital::left);
 ControllerButton armBottom(ControllerDigital::down);
+ControllerButton deployTrigger(ControllerDigital::A);
 
 //drive variables
 float ch1;
@@ -59,6 +138,7 @@ void SetDeployMiddle()
 void opcontrol()
 {
 	PANS::UISystem::MessageBrain("Opcontrol starting");
+	Core::Initialize();
 	while (true)
 	{
 		//intake controller
@@ -71,17 +151,21 @@ void opcontrol()
 			}
 			else
 			{
+				Intake::SetSpeed(1.0);
 				Intake::Start();
 				isIntakeRunning = true;
 			}
 		}
-		if (intakeReverse.isPressed())
+		if (intakeReverse.changedToPressed())
 		{
 			Intake::SetBackwards();
+			Intake::SetSpeed(1.0);
+			Intake::Start();
 		}
-		else
+		else if(intakeReverse.changedToReleased())
 		{
 			Intake::SetForwards();
+			Intake::Stop();
 		}
 		//deploy
 		if(deployToggle.changedToPressed())
@@ -101,6 +185,10 @@ void opcontrol()
 		{
 			SetDeployMiddle();
 		}
+		if(deployTrigger.changedToPressed())
+		{
+			Deploy::Deploy();
+		}
 		//arm control
 		if(armUp.isPressed())
 		{
@@ -116,11 +204,17 @@ void opcontrol()
 		}
 		if(lowTower.changedToPressed())
 		{
+			Deploy::Move(0.50F);
+			isDeployed = true;
+			pros::delay(500);
 			arm_pos = Arm::lowTower;
 			Arm::SetPosition(arm_pos);
 		}
 		if(highTower.changedToPressed())
 		{
+			Deploy::Move(0.50F);
+			isDeployed = true;
+			pros::delay(500);
 			arm_pos = Arm::highTower;
 			Arm::SetPosition(arm_pos);
 		}
