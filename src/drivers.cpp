@@ -181,42 +181,43 @@ namespace Deploy
     {
       if(isDeploying)
       {
-        // if(isWide)
-        // {
           //////////Deploy code for wide goal//////////
           //BOTH ISH
           //move the intake
           Intake::SetBackwards();
           Intake::SetSpeed(0.5);
           Intake::Start();
-          pros::Task::delay(80);
+          pros::Task::delay(100);
           if(!isDeploying) //check for abort
             continue;
           //move the intake
-          Intake::SetSpeed(0.1);
+          Intake::Stop();
           //move the ramp
           Deploy::Move(1.0F);
           pros::Task::delay(3300);
-          if(!isDeploying) //check for abort
-            continue;
-          //move intake
-          Intake::SetSpeed(0.7);
-          Intake::SetForwards();
-          //move forwards
-          Motors::Chassis::frontLeft.moveVoltage(800);
-          Motors::Chassis::frontRight.moveVoltage(-800);
-          Motors::Chassis::backLeft.moveVoltage(800);
-          Motors::Chassis::backRight.moveVoltage(-800);
-          pros::Task::delay(800);
           if(!isDeploying) //check for abort
             continue;
           //move the intake
           Intake::SetBackwards();
           Intake::SetSpeed(0.4);
           Intake::Start();
+          pros::Task::delay(600);
+          //move the ramp
+          Deploy::Move(0.9);
+          pros::Task::delay(200);
+          //move forwards
+          Motors::Chassis::frontLeft.moveVoltage(1500);
+          Motors::Chassis::frontRight.moveVoltage(-1500);
+          Motors::Chassis::backLeft.moveVoltage(1500);
+          Motors::Chassis::backRight.moveVoltage(-1500);
+          pros::delay(800);
+          Intake::Stop();
+          if(!isDeploying) //check for abort
+            continue;
           // pros::delay(1300);
           // pros::delay(1500);
-          pros::delay(1800);
+          //start the intake
+          Intake::Start();
           //move the deploy
           Deploy::Move(0.00F);
           pros::delay(1500);
@@ -237,65 +238,10 @@ namespace Deploy
           isDeploying = false;
           isFinished = true;
           //////////End of wide goal deploy code//////////
-        // }
-        // else
-        // {
-          // //////////Deploy code for smaller goal//////////
-          // //move the intake
-          // Intake::SetBackwards();
-          // Intake::SetSpeed(0.4);
-          // Intake::Start();
-          // pros::Task::delay(80);
-          // if(!isDeploying) //check for abort
-          //   continue;
-          // //move the intake
-          // Intake::SetSpeed(0.1);
-          // //move the ramp
-          // Deploy::Move(1.0F);
-          // pros::Task::delay(3300);
-          // if(!isDeploying) //check for abort
-          //   continue;
-          // //move intake
-          // Intake::SetSpeed(0.7);
-          // Intake::SetForwards();
-          // //move forwards
-          // Motors::Chassis::frontLeft.moveVoltage(2000);
-          // Motors::Chassis::frontRight.moveVoltage(-2000);
-          // Motors::Chassis::backLeft.moveVoltage(2000);
-          // Motors::Chassis::backRight.moveVoltage(-2000);
-          // pros::Task::delay(700);
-          // if(!isDeploying) //check for abort
-          //   continue;
-          // //move the intake
-          // Intake::SetBackwards();
-          // Intake::SetSpeed(0.45);
-          // Intake::Start();
-          // pros::delay(800);
-          // //move the deploy
-          // Deploy::Move(0.00F);
-          // pros::delay(800);
-          // //move backwards
-          // Motors::Chassis::frontLeft.moveVoltage(-2000);
-          // Motors::Chassis::frontRight.moveVoltage(2000);
-          // Motors::Chassis::backLeft.moveVoltage(-2000);
-          // Motors::Chassis::backRight.moveVoltage(2000);
-          // pros::Task::delay(3000);
-          // if(!isDeploying) //check for abort
-          //   continue;
-          // Deploy::Move(0.0F);
-          // Intake::SetForwards();
-          // Intake::SetSpeed(1.00);
-          // Intake::Stop();
-          // Arm::controller->setTarget(0);
-          // //finish
-          // isDeploying = false;
-          // isFinished = true;
-          // //////////End of deploy code for smaller goal//////////
-        // }
-      // }
-      // else
-      // {
-        pros::Task::delay(20);
+      }
+      else
+      {
+          pros::Task::delay(20);
       }
     }
   }
