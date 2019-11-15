@@ -173,11 +173,13 @@ void opcontrol()
 			if(isDeployed)
 			{
 				Deploy::Move(0.00F);
+				Arm::SetPosition(0);
 				isDeployed = false;
 			}
 			else
 			{
 				Deploy::Move(1.00F);
+				Arm::SetPosition(1800);
 				isDeployed = true;
 			}
 		}

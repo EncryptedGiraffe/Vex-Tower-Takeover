@@ -10,34 +10,47 @@ namespace Core
   {
     if(isInitialized)
       return;
+      //arm up
+      Arm::SetPosition(4000);
+      pros::Task::delay(1500);
+      //arm down
+      Arm::SetPosition(0);
+      pros::Task::delay(1000);
+      // move forwards
+      Motors::Chassis::frontLeft.moveVoltage(7000);
+      Motors::Chassis::frontRight.moveVoltage(-7000);
+      Motors::Chassis::backLeft.moveVoltage(7000);
+      Motors::Chassis::backRight.moveVoltage(-7000);
+      pros::delay(500);
+
     //move forwards
-    Motors::Chassis::frontLeft.moveVoltage(7000);
-    Motors::Chassis::frontRight.moveVoltage(-7000);
-    Motors::Chassis::backLeft.moveVoltage(7000);
-    Motors::Chassis::backRight.moveVoltage(-7000);
-    pros::delay(400);
-    //move backward
-    Motors::Chassis::frontLeft.moveVoltage(-7000);
-    Motors::Chassis::frontRight.moveVoltage(7000);
-    Motors::Chassis::backLeft.moveVoltage(-7000);
-    Motors::Chassis::backRight.moveVoltage(7000);
-    pros::delay(400);
-    //move backwards
-    Motors::Chassis::frontLeft.moveVoltage(0);
-    Motors::Chassis::frontRight.moveVoltage(0);
-    Motors::Chassis::backLeft.moveVoltage(0);
-    Motors::Chassis::backRight.moveVoltage(0);
-    //deploy up
-    Deploy::Move(0.30);
-    pros::delay(500);
-    //arm up
-    Arm::SetPosition(800);
-    pros::delay(500);
-    //arm down
-    Arm::SetPosition(0);
-    //deploy down
-    Deploy::Move(0.00);
-    isInitialized = true;
+    // Motors::Chassis::frontLeft.moveVoltage(7000);
+    // Motors::Chassis::frontRight.moveVoltage(-7000);
+    // Motors::Chassis::backLeft.moveVoltage(7000);
+    // Motors::Chassis::backRight.moveVoltage(-7000);
+    // pros::delay(400);
+    // //move backward
+    // Motors::Chassis::frontLeft.moveVoltage(-7000);
+    // Motors::Chassis::frontRight.moveVoltage(7000);
+    // Motors::Chassis::backLeft.moveVoltage(-7000);
+    // Motors::Chassis::backRight.moveVoltage(7000);
+    // pros::delay(400);
+    // //move backwards
+    // Motors::Chassis::frontLeft.moveVoltage(0);
+    // Motors::Chassis::frontRight.moveVoltage(0);
+    // Motors::Chassis::backLeft.moveVoltage(0);
+    // Motors::Chassis::backRight.moveVoltage(0);
+    // //deploy up
+    // Deploy::Move(0.30);
+    // pros::delay(500);
+    // //arm up
+    // Arm::SetPosition(800);
+    // pros::delay(500);
+    // //arm down
+    // Arm::SetPosition(0);
+    // //deploy down
+    // Deploy::Move(0.00);
+    // isInitialized = true;
   }
 }
 
@@ -167,7 +180,7 @@ namespace Deploy
     //calculate new position
     cur_pos = per * finalPosition;
     //set the motor
-    Motors::deploy.moveAbsolute(-cur_pos, maxSpeed);
+    Motors::deploy.moveAbsolute(cur_pos, maxSpeed);
   }
   //task state variables
   bool isDeploying = false;
@@ -183,6 +196,11 @@ namespace Deploy
       {
           //////////Deploy code for wide goal//////////
           //BOTH ISH
+          // slurp
+          Intake::SetForwards();
+          Intake::SetSpeed(1.0);
+          Intake::Start();
+          pros::Task::delay(400);
           //move the intake
           Intake::SetBackwards();
           Intake::SetSpeed(0.5);
@@ -203,7 +221,7 @@ namespace Deploy
           Intake::Start();
           pros::Task::delay(600);
           //move the ramp
-          Deploy::Move(0.9);
+          Deploy::Move(0.7);
           pros::Task::delay(200);
           //move forwards
           Motors::Chassis::frontLeft.moveVoltage(1500);
@@ -333,6 +351,6 @@ namespace Arm
       cur_pos = pos;
     }
     //set the motor
-    controller->setTarget(cur_pos);
+    controller->setTarget(-cur_pos);
   }
 }

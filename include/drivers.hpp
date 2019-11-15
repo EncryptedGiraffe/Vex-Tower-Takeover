@@ -14,15 +14,15 @@ namespace Ports
 {
   namespace Chassis
   {
-    const int frontLeft = 11;
-    const int frontRight = 13;
-    const int backLeft = 14;
-    const int backRight = 15;
+    const int frontLeft = 1;
+    const int frontRight = 12;
+    const int backLeft = 8;
+    const int backRight = 10;
   }
-  const int deploy = 12;
+  const int deploy = 2;
   namespace Intake
   {
-    const int left = 8;
+    const int left = 20;
     const int right = 9;
   }
   const int arm = 3;
@@ -62,7 +62,7 @@ namespace Intake
 namespace Deploy
 {
   //bounds
-  const int finalPosition = 5800;
+  const int finalPosition = 6800;
   const int maxSpeed = 100;
   //get the position of the ramp
   int GetPosition();
