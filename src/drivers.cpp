@@ -205,7 +205,7 @@ namespace Deploy
           Intake::SetBackwards();
           Intake::SetSpeed(0.5);
           Intake::Start();
-          pros::Task::delay(100);
+          pros::Task::delay(300);
           if(!isDeploying) //check for abort
             continue;
           //move the intake
@@ -221,7 +221,7 @@ namespace Deploy
           Intake::Start();
           pros::Task::delay(600);
           //move the ramp
-          Deploy::Move(0.7);
+          Deploy::Move(0.8);
           pros::Task::delay(200);
           //move forwards
           Motors::Chassis::frontLeft.moveVoltage(1500);
