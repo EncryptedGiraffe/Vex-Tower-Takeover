@@ -23,8 +23,13 @@ namespace Ports
   namespace Intake
   {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     const int left = 8;
     const int right = 9;
+=======
+    const int left = 20;
+    const int right = 17;
+>>>>>>> Stashed changes
 =======
     const int left = 20;
     const int right = 17;
@@ -68,7 +73,11 @@ namespace Deploy
 {
   //bounds
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   const int finalPosition = 5800;
+=======
+  const int finalPosition = 6750;
+>>>>>>> Stashed changes
 =======
   const int finalPosition = 6750;
 >>>>>>> Stashed changes

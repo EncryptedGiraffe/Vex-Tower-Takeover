@@ -202,7 +202,10 @@ namespace Deploy
           //////////Deploy code for wide goal//////////
           //BOTH ISH
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
           //move backwards
           Motors::Chassis::frontLeft.moveVoltage(-1300);
           Motors::Chassis::frontRight.moveVoltage(1300);
@@ -218,6 +221,9 @@ namespace Deploy
           Intake::SetSpeed(0.3);
           Intake::Start();
           pros::Task::delay(600);
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
           //move the intake
           Intake::SetBackwards();
@@ -240,8 +246,13 @@ namespace Deploy
           pros::Task::delay(600);
           //move the ramp
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
           Deploy::Move(0.9);
           pros::Task::delay(200);
+=======
+          Deploy::Move(0.8);
+          pros::Task::delay(400);
+>>>>>>> Stashed changes
 =======
           Deploy::Move(0.8);
           pros::Task::delay(400);
