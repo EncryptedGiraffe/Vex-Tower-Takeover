@@ -10,6 +10,24 @@ namespace Core
   {
     if(isInitialized)
       return;
+<<<<<<< Updated upstream
+=======
+      //arm up
+      Arm::SetPosition(4000);
+      Deploy::Move(0.2);
+      pros::Task::delay(1200);
+      //arm down
+      Arm::SetPosition(0);
+      Deploy::Move(0);
+      pros::Task::delay(1000);
+      // move forwards
+      Motors::Chassis::frontLeft.moveVoltage(5000);
+      Motors::Chassis::frontRight.moveVoltage(-5000);
+      Motors::Chassis::backLeft.moveVoltage(5000);
+      Motors::Chassis::backRight.moveVoltage(-5000);
+      pros::delay(500);
+
+>>>>>>> Stashed changes
     //move forwards
     Motors::Chassis::frontLeft.moveVoltage(7000);
     Motors::Chassis::frontRight.moveVoltage(-7000);
@@ -183,9 +201,27 @@ namespace Deploy
       {
           //////////Deploy code for wide goal//////////
           //BOTH ISH
+<<<<<<< Updated upstream
+=======
+          //move backwards
+          Motors::Chassis::frontLeft.moveVoltage(-1300);
+          Motors::Chassis::frontRight.moveVoltage(1300);
+          Motors::Chassis::backLeft.moveVoltage(-1300);
+          Motors::Chassis::backRight.moveVoltage(1300);
+          pros::Task::delay(400);
+          Motors::Chassis::frontLeft.moveVoltage(0);
+          Motors::Chassis::frontRight.moveVoltage(0);
+          Motors::Chassis::backLeft.moveVoltage(0);
+          Motors::Chassis::backRight.moveVoltage(0);
+          // slurp
+          Intake::SetForwards();
+          Intake::SetSpeed(0.3);
+          Intake::Start();
+          pros::Task::delay(600);
+>>>>>>> Stashed changes
           //move the intake
           Intake::SetBackwards();
-          Intake::SetSpeed(0.5);
+          Intake::SetSpeed(0.3);
           Intake::Start();
           pros::Task::delay(100);
           if(!isDeploying) //check for abort
@@ -193,7 +229,7 @@ namespace Deploy
           //move the intake
           Intake::Stop();
           //move the ramp
-          Deploy::Move(1.0F);
+          Deploy::Move(0.95F);
           pros::Task::delay(3300);
           if(!isDeploying) //check for abort
             continue;
@@ -203,14 +239,19 @@ namespace Deploy
           Intake::Start();
           pros::Task::delay(600);
           //move the ramp
+<<<<<<< Updated upstream
           Deploy::Move(0.9);
           pros::Task::delay(200);
+=======
+          Deploy::Move(0.8);
+          pros::Task::delay(400);
+>>>>>>> Stashed changes
           //move forwards
           Motors::Chassis::frontLeft.moveVoltage(1500);
           Motors::Chassis::frontRight.moveVoltage(-1500);
           Motors::Chassis::backLeft.moveVoltage(1500);
           Motors::Chassis::backRight.moveVoltage(-1500);
-          pros::delay(800);
+          pros::delay(300);
           Intake::Stop();
           if(!isDeploying) //check for abort
             continue;
