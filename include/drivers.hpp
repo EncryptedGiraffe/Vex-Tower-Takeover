@@ -22,18 +22,8 @@ namespace Ports
   const int deploy = 12;
   namespace Intake
   {
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-    const int left = 8;
-    const int right = 9;
-=======
     const int left = 20;
     const int right = 17;
->>>>>>> Stashed changes
-=======
-    const int left = 20;
-    const int right = 17;
->>>>>>> Stashed changes
   }
   const int arm = 3;
 }
@@ -72,15 +62,7 @@ namespace Intake
 namespace Deploy
 {
   //bounds
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-  const int finalPosition = 5800;
-=======
   const int finalPosition = 6750;
->>>>>>> Stashed changes
-=======
-  const int finalPosition = 6750;
->>>>>>> Stashed changes
   const int maxSpeed = 100;
   //get the position of the ramp
   int GetPosition();

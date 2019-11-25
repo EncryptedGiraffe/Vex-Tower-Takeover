@@ -10,47 +10,25 @@ namespace Core
   {
     if(isInitialized)
       return;
-<<<<<<< Updated upstream
-=======
-      //arm up
-      Arm::SetPosition(4000);
-      Deploy::Move(0.2);
-      pros::Task::delay(1200);
-      //arm down
-      Arm::SetPosition(0);
-      Deploy::Move(0);
-      pros::Task::delay(1000);
-      // move forwards
-      Motors::Chassis::frontLeft.moveVoltage(5000);
-      Motors::Chassis::frontRight.moveVoltage(-5000);
-      Motors::Chassis::backLeft.moveVoltage(5000);
-      Motors::Chassis::backRight.moveVoltage(-5000);
-      pros::delay(500);
-
->>>>>>> Stashed changes
-    //move forwards
-    Motors::Chassis::frontLeft.moveVoltage(7000);
-    Motors::Chassis::frontRight.moveVoltage(-7000);
-    Motors::Chassis::backLeft.moveVoltage(7000);
-    Motors::Chassis::backRight.moveVoltage(-7000);
-    pros::delay(400);
-    //move backward
-    Motors::Chassis::frontLeft.moveVoltage(-7000);
-    Motors::Chassis::frontRight.moveVoltage(7000);
-    Motors::Chassis::backLeft.moveVoltage(-7000);
-    Motors::Chassis::backRight.moveVoltage(7000);
-    pros::delay(400);
-    //move backwards
+    //arm up
+    Arm::SetPosition(4000);
+    Deploy::Move(0.2);
+    pros::Task::delay(1200);
+    //arm down
+    Arm::SetPosition(0);
+    Deploy::Move(0);
+    pros::Task::delay(1000);
+    // move forwards
+    Motors::Chassis::frontLeft.moveVoltage(5000);
+    Motors::Chassis::frontRight.moveVoltage(-5000);
+    Motors::Chassis::backLeft.moveVoltage(5000);
+    Motors::Chassis::backRight.moveVoltage(-5000);
+    pros::delay(500);
+    //stop
     Motors::Chassis::frontLeft.moveVoltage(0);
     Motors::Chassis::frontRight.moveVoltage(0);
     Motors::Chassis::backLeft.moveVoltage(0);
     Motors::Chassis::backRight.moveVoltage(0);
-    //deploy up
-    Deploy::Move(0.30);
-    pros::delay(500);
-    //arm up
-    Arm::SetPosition(800);
-    pros::delay(500);
     //arm down
     Arm::SetPosition(0);
     //deploy down
@@ -201,11 +179,6 @@ namespace Deploy
       {
           //////////Deploy code for wide goal//////////
           //BOTH ISH
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
-=======
->>>>>>> Stashed changes
           //move backwards
           Motors::Chassis::frontLeft.moveVoltage(-1300);
           Motors::Chassis::frontRight.moveVoltage(1300);
@@ -221,10 +194,6 @@ namespace Deploy
           Intake::SetSpeed(0.3);
           Intake::Start();
           pros::Task::delay(600);
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
           //move the intake
           Intake::SetBackwards();
           Intake::SetSpeed(0.3);
@@ -245,18 +214,8 @@ namespace Deploy
           Intake::Start();
           pros::Task::delay(600);
           //move the ramp
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
           Deploy::Move(0.9);
           pros::Task::delay(200);
-=======
-          Deploy::Move(0.8);
-          pros::Task::delay(400);
->>>>>>> Stashed changes
-=======
-          Deploy::Move(0.8);
-          pros::Task::delay(400);
->>>>>>> Stashed changes
           //move forwards
           Motors::Chassis::frontLeft.moveVoltage(1500);
           Motors::Chassis::frontRight.moveVoltage(-1500);
