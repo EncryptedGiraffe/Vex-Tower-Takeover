@@ -32,21 +32,12 @@ void autonomous()
 		//start with preload angled in goal zone
 		//deploy
 		Core::Initialize();
-		//slurp up line of four cubes
-		Intake::SetForwards();
-		Intake::SetSpeed(1.00F);
-		Intake::Start();
-		Motors::Chassis::frontLeft.moveVoltage(-5000);
-		Motors::Chassis::frontRight.moveVoltage(-5000);
-		Motors::Chassis::backLeft.moveVoltage(5000);
-		Motors::Chassis::backRight.moveVoltage(5000);
-		pros::delay(2000);
 		//forward
 		Motors::Chassis::frontLeft.moveVoltage(5000);
 		Motors::Chassis::frontRight.moveVoltage(-5000);
 		Motors::Chassis::backLeft.moveVoltage(5000);
 		Motors::Chassis::backRight.moveVoltage(-5000);
-		pros::delay(1800);
+		pros::delay(1500);
 		Motors::Chassis::frontLeft.moveVoltage(0);
 		Motors::Chassis::frontRight.moveVoltage(0);
 		Motors::Chassis::backLeft.moveVoltage(0);
@@ -62,21 +53,12 @@ void autonomous()
 		//start with preload angled in goal zone
 		//deploy
 		Core::Initialize();
-		//slurp up line of four cubes
-		Intake::SetForwards();
-		Intake::SetSpeed(1.00F);
-		Intake::Start();
-		Motors::Chassis::frontLeft.moveVoltage(5000);
-    Motors::Chassis::frontRight.moveVoltage(5000);
-    Motors::Chassis::backLeft.moveVoltage(-5000);
-    Motors::Chassis::backRight.moveVoltage(-5000);
-		pros::delay(2000);
 		//forward
 		Motors::Chassis::frontLeft.moveVoltage(5000);
     Motors::Chassis::frontRight.moveVoltage(-5000);
     Motors::Chassis::backLeft.moveVoltage(5000);
     Motors::Chassis::backRight.moveVoltage(-5000);
-		pros::delay(1800);
+		pros::delay(1500);
 		Motors::Chassis::frontLeft.moveVoltage(0);
     Motors::Chassis::frontRight.moveVoltage(0);
     Motors::Chassis::backLeft.moveVoltage(0);
@@ -132,7 +114,7 @@ void ArmBounds()
 void SetDeployMiddle()
 {
 	isDeployed = true;
-	Deploy::Move(0.50F);
+	Deploy::Move(0.30F);
 }
 
 void opcontrol()
@@ -206,16 +188,14 @@ void opcontrol()
 		}
 		if(lowTower.changedToPressed())
 		{
-			Deploy::Move(0.50F);
-			isDeployed = true;
+			SetDeployMiddle();
 			pros::delay(500);
 			arm_pos = Arm::lowTower;
 			Arm::SetPosition(arm_pos);
 		}
 		if(highTower.changedToPressed())
 		{
-			Deploy::Move(0.50F);
-			isDeployed = true;
+			SetDeployMiddle();
 			pros::delay(500);
 			arm_pos = Arm::highTower;
 			Arm::SetPosition(arm_pos);
