@@ -22,8 +22,8 @@ namespace Ports
   const int deploy = 2;
   namespace Intake
   {
-    const int left = 20;
-    const int right = 17;
+    const int left = 17;
+    const int right = 21;
   }
   const int arm = 3;
 }
