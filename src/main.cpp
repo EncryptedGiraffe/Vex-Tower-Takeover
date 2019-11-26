@@ -25,7 +25,7 @@ void competition_initialize()
 
 void autonomous()
 {
-	// Core::Initialize();
+	Core::Initialize();
 	if(isAutoRed)
 	{
 		//////////Legal but kinda not autonomous routine//////////
@@ -120,7 +120,7 @@ void SetDeployMiddle()
 void opcontrol()
 {
 	PANS::UISystem::MessageBrain("Opcontrol starting");
-	Core::Initialize();
+	//Core::Initialize();
 	while (true)
 	{
 		//intake controller

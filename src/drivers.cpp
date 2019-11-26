@@ -11,7 +11,7 @@ namespace Core
     if(isInitialized)
       return;
     //arm up
-    Arm::SetPosition(4000);
+    Arm::SetPosition(4700);
     Deploy::Move(0.2);
     pros::Task::delay(1200);
     //arm down
@@ -177,8 +177,7 @@ namespace Deploy
     {
       if(isDeploying)
       {
-          //////////Deploy code for wide goal//////////
-          //BOTH ISH
+          //////////Deploy code for small goal//////////
           //move backwards
           Motors::Chassis::frontLeft.moveVoltage(-1300);
           Motors::Chassis::frontRight.moveVoltage(1300);
@@ -198,7 +197,7 @@ namespace Deploy
           Intake::SetBackwards();
           Intake::SetSpeed(0.3);
           Intake::Start();
-          pros::Task::delay(300);
+          pros::Task::delay(000);
           if(!isDeploying) //check for abort
             continue;
           //move the intake
@@ -228,15 +227,17 @@ namespace Deploy
           // pros::delay(1300);
           // pros::delay(1500);
           //start the intake
+          pros::delay(200);
           Intake::Start();
+          Intake::SetSpeed(0.3);
           //move the deploy
           Deploy::Move(0.00F);
           pros::delay(1500);
           //move backwards
-          Motors::Chassis::frontLeft.moveVoltage(-2000);
-          Motors::Chassis::frontRight.moveVoltage(2000);
-          Motors::Chassis::backLeft.moveVoltage(-2000);
-          Motors::Chassis::backRight.moveVoltage(2000);
+          Motors::Chassis::frontLeft.moveVoltage(-1900);
+          Motors::Chassis::frontRight.moveVoltage(1900);
+          Motors::Chassis::backLeft.moveVoltage(-1900);
+          Motors::Chassis::backRight.moveVoltage(1900);
           pros::Task::delay(3000);
           if(!isDeploying) //check for abort
             continue;

@@ -23,7 +23,7 @@ namespace Ports
   namespace Intake
   {
     const int left = 17;
-    const int right = 21;
+    const int right = 15;
   }
   const int arm = 3;
 }
