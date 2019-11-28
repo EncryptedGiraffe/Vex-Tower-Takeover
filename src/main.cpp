@@ -46,6 +46,53 @@ void autonomous()
 		//intake off
 		Intake::Stop();
 		//////////End of legal but kinda not autonomous routine//////////
+		/////////Legitimate 4 stack//////////
+		// forward, slurp up 4 cube snake
+		// Intake::SetForwards();
+		// Intake::SetSpeed(1.0);
+		// Intake::Start();
+		// Motors::Chassis::frontLeft.moveVoltage(7000);
+		// Motors::Chassis::frontRight.moveVoltage(-7000);
+		// Motors::Chassis::backLeft.moveVoltage(7000);
+		// Motors::Chassis::backRight.moveVoltage(-7000);
+		// pros::delay(1500);
+		// Motors::Chassis::frontLeft.moveVoltage(0);
+		// Motors::Chassis::frontRight.moveVoltage(0);
+		// Motors::Chassis::backLeft.moveVoltage(0);
+		// Motors::Chassis::backRight.moveVoltage(0);
+		// Intake::Stop();
+		// // 360 turn, counterclockwise to avoid hitting tower
+		// Motors::Chassis::frontLeft.moveVoltage(-7000);
+		// Motors::Chassis::frontRight.moveVoltage(-7000);
+		// Motors::Chassis::backLeft.moveVoltage(-7000);
+		// Motors::Chassis::backRight.moveVoltage(-7000);
+		// pros::delay(800);
+		// Motors::Chassis::frontLeft.moveVoltage(0);
+		// Motors::Chassis::frontRight.moveVoltage(0);
+		// Motors::Chassis::backLeft.moveVoltage(0);
+		// Motors::Chassis::backRight.moveVoltage(0);
+		// // forwards toward goal, stop at first tile
+		// Motors::Chassis::frontLeft.moveVoltage(5000);
+		// Motors::Chassis::frontRight.moveVoltage(-5000);
+		// Motors::Chassis::backLeft.moveVoltage(5000);
+		// Motors::Chassis::backRight.moveVoltage(-5000);
+		// pros::delay(900);
+		// Motors::Chassis::frontLeft.moveVoltage(0);
+		// Motors::Chassis::frontRight.moveVoltage(0);
+		// Motors::Chassis::backLeft.moveVoltage(0);
+		// Motors::Chassis::backRight.moveVoltage(0);
+		// // 45 turn counterclockwise
+		// Motors::Chassis::frontLeft.moveVoltage(-5000);
+		// Motors::Chassis::frontRight.moveVoltage(-5000);
+		// Motors::Chassis::backLeft.moveVoltage(-5000);
+		// Motors::Chassis::backRight.moveVoltage(-5000);
+		// pros::delay(500);
+		// Motors::Chassis::frontLeft.moveVoltage(0);
+		// Motors::Chassis::frontRight.moveVoltage(0);
+		// Motors::Chassis::backLeft.moveVoltage(0);
+		// Motors::Chassis::backRight.moveVoltage(0);
+		// // deploy
+		// Deploy::Deploy();
 	}
 	else
 	{
@@ -120,7 +167,7 @@ void SetDeployMiddle()
 void opcontrol()
 {
 	PANS::UISystem::MessageBrain("Opcontrol starting");
-	//Core::Initialize();
+	Core::Initialize();
 	while (true)
 	{
 		//intake controller

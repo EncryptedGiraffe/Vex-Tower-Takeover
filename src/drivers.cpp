@@ -177,7 +177,7 @@ namespace Deploy
     {
       if(isDeploying)
       {
-          //////////Deploy code for small goal//////////
+          //////////Deploy code for both//////////
           //move backwards
           Motors::Chassis::frontLeft.moveVoltage(-1300);
           Motors::Chassis::frontRight.moveVoltage(1300);
@@ -238,7 +238,8 @@ namespace Deploy
           Motors::Chassis::frontRight.moveVoltage(1900);
           Motors::Chassis::backLeft.moveVoltage(-1900);
           Motors::Chassis::backRight.moveVoltage(1900);
-          pros::Task::delay(3000);
+          // pros::Task::delay(3000);
+          pros::Task::delay(2000);
           if(!isDeploying) //check for abort
             continue;
           Deploy::Move(0.0F);
