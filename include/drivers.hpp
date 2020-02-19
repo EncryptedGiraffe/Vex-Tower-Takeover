@@ -71,8 +71,8 @@ namespace Intake
 namespace Deploy
 {
   //bounds
-  const int finalPosition = 6750;
-  const int maxSpeed = 100;
+  const int finalPosition = 4400;
+  const int maxSpeed = 50;
   //get the position of the ramp
   int GetPosition();
   //percent is a decimal percentage of the deploy system's total movement

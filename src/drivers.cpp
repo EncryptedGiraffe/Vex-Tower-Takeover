@@ -162,7 +162,7 @@ namespace Deploy
     //calculate new position
     cur_pos = per * finalPosition;
     //set the motor
-    Motors::deploy.moveAbsolute(-cur_pos, maxSpeed);
+    Motors::deploy.moveAbsolute(cur_pos, maxSpeed);
   }
   //task state variables
   bool isDeploying = false;
@@ -323,6 +323,7 @@ namespace Arm
   {
     controller = AsyncPosControllerBuilder()
     .withMotor(Ports::arm)
+    .withGearset(AbstractMotor::gearset::red)
     .build();
   }
   int cur_pos = 0;
@@ -343,6 +344,6 @@ namespace Arm
       cur_pos = pos;
     }
     //set the motor
-    controller->setTarget(cur_pos);
+    controller->setTarget(-cur_pos);
   }
 }
