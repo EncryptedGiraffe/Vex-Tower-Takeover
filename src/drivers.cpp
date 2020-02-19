@@ -11,28 +11,28 @@ namespace Core
     if(isInitialized)
       return;
     //arm up
-    Arm::SetPosition(4000);
-    Deploy::Move(0.2);
-    pros::Task::delay(1200);
+    //Arm::SetPosition(4000);
+    //Deploy::Move(0.2);
+    //pros::Task::delay(1200);
     //arm down
-    Arm::SetPosition(0);
-    Deploy::Move(0);
-    pros::Task::delay(1000);
+    //Arm::SetPosition(0);
+    //Deploy::Move(0);
+    //pros::Task::delay(1000);
     // move forwards
-    Motors::Chassis::frontLeft.moveVoltage(5000);
-    Motors::Chassis::frontRight.moveVoltage(-5000);
-    Motors::Chassis::backLeft.moveVoltage(5000);
-    Motors::Chassis::backRight.moveVoltage(-5000);
-    pros::delay(500);
+    //Motors::Chassis::frontLeft.moveVoltage(5000);
+    //Motors::Chassis::frontRight.moveVoltage(-5000);
+    //Motors::Chassis::backLeft.moveVoltage(5000);
+    //Motors::Chassis::backRight.moveVoltage(-5000);
+    //pros::delay(500);
     //stop
-    Motors::Chassis::frontLeft.moveVoltage(0);
-    Motors::Chassis::frontRight.moveVoltage(0);
-    Motors::Chassis::backLeft.moveVoltage(0);
-    Motors::Chassis::backRight.moveVoltage(0);
+    //Motors::Chassis::frontLeft.moveVoltage(0);
+    //Motors::Chassis::frontRight.moveVoltage(0);
+    //Motors::Chassis::backLeft.moveVoltage(0);
+    //Motors::Chassis::backRight.moveVoltage(0);
     //arm down
-    Arm::SetPosition(0);
+    //Arm::SetPosition(0);
     //deploy down
-    Deploy::Move(0.00);
+    //Deploy::Move(0.00);
     isInitialized = true;
   }
 }
@@ -78,8 +78,7 @@ namespace Chassis
     //create the controller
     controller = ChassisControllerBuilder()
     .withMotors(Ports::Chassis::frontLeft, -Ports::Chassis::frontRight, -Ports::Chassis::backRight, Ports::Chassis::backLeft)
-    .withGearset(AbstractMotor::gearset::green)
-    .withDimensions({{4_in, 14.25_in}, imev5GreenTPR})
+    .withDimensions(AbstractMotor::gearset::green, {{4_in, 8.75_in}, imev5GreenTPR})
     .build();
   }
   /*
