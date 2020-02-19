@@ -23,7 +23,6 @@ namespace Ports
 {
   namespace Chassis
   {
-<<<<<<< Updated upstream
     const int frontLeft = 11;
     const int frontRight = 13;
     const int backLeft = 14;
@@ -34,18 +33,6 @@ namespace Ports
   {
     const int left = 20;
     const int right = 17;
-=======
-    const int frontLeft = 1;
-    const int frontRight = 2;
-    const int backLeft = 3;
-    const int backRight = 8;
-  }
-  const int deploy = 10;
-  namespace Intake
-  {
-    const int left = 11;
-    const int right = 12;
->>>>>>> Stashed changes
   }
   const int arm = 13;
 }
