@@ -1,3 +1,12 @@
+/* Random notes and crap like that
+Deploy:
+start with the lowest cube at the end of the ramp as we push it forward
+this will allow us to skip the cube lowering step that gave us so many issues before
+try and fully retract the cube support ramp before engaging the rollers and driving back
+this will give the rollers much more authority
+
+*/
+
 #ifndef DRIVERS_HPP
 #define DRIVERS_HPP
 #include "main.h"
@@ -25,7 +34,7 @@ namespace Ports
     const int left = 20;
     const int right = 17;
   }
-  const int arm = 3;
+  const int arm = 13;
 }
 
 namespace Motors
@@ -71,7 +80,7 @@ namespace Deploy
   //run the deploy sequence for the small goal
   void Deploy();
   //run the deploy sequence for the wide goal
-  void DeployWide();
+  //void DeployWide();
   //initialize
   void Initialize();
 }
