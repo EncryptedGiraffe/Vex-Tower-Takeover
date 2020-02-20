@@ -10,29 +10,13 @@ namespace Core
   {
     if(isInitialized)
       return;
-    //arm up
-    //Arm::SetPosition(4000);
-    //Deploy::Move(0.2);
-    //pros::Task::delay(1200);
-    //arm down
-    //Arm::SetPosition(0);
-    //Deploy::Move(0);
-    //pros::Task::delay(1000);
-    // move forwards
-    //Motors::Chassis::frontLeft.moveVoltage(5000);
-    //Motors::Chassis::frontRight.moveVoltage(-5000);
-    //Motors::Chassis::backLeft.moveVoltage(5000);
-    //Motors::Chassis::backRight.moveVoltage(-5000);
-    //pros::delay(500);
-    //stop
-    //Motors::Chassis::frontLeft.moveVoltage(0);
-    //Motors::Chassis::frontRight.moveVoltage(0);
-    //Motors::Chassis::backLeft.moveVoltage(0);
-    //Motors::Chassis::backRight.moveVoltage(0);
-    //arm down
-    //Arm::SetPosition(0);
-    //deploy down
-    //Deploy::Move(0.00);
+    //turn on the intake backwards
+    Intake::SetSpeed(1.00);
+    Intake::SetBackwards();
+    Intake::Start();
+    pros::delay(1000);
+    Intake::Stop();
+
     isInitialized = true;
   }
 }
@@ -143,6 +127,7 @@ namespace Intake
 namespace Deploy
 {
   int cur_pos = 0;
+  int _speed = 50;
   //get the position of the ramp
   int GetPosition()
   {
@@ -162,7 +147,12 @@ namespace Deploy
     //calculate new position
     cur_pos = per * finalPosition;
     //set the motor
-    Motors::deploy.moveAbsolute(cur_pos, maxSpeed);
+    Motors::deploy.moveAbsolute(cur_pos, _speed);
+  }
+  //set the speed of the ramp
+  void SetSpeed(int speed)
+  {
+    _speed = speed;
   }
   //task state variables
   bool isDeploying = false;
@@ -176,78 +166,45 @@ namespace Deploy
     {
       if(isDeploying)
       {
-          //////////Deploy code for wide goal//////////
-          //BOTH ISH
-          //move backwards
-          Motors::Chassis::frontLeft.moveVoltage(-1300);
-          Motors::Chassis::frontRight.moveVoltage(1300);
-          Motors::Chassis::backLeft.moveVoltage(-1300);
-          Motors::Chassis::backRight.moveVoltage(1300);
-          pros::Task::delay(400);
-          Motors::Chassis::frontLeft.moveVoltage(0);
-          Motors::Chassis::frontRight.moveVoltage(0);
-          Motors::Chassis::backLeft.moveVoltage(0);
-          Motors::Chassis::backRight.moveVoltage(0);
-          // slurp
+          if(!isDeploying) //check for abort
+            continue;
+          //move the ramp most of the way up
+          SetSpeed(90);
+          Move(0.7);
+          pros::delay(2000);
+          if(!isDeploying) //check for abort
+            continue;
+          //turn on the intake
           Intake::SetForwards();
-          Intake::SetSpeed(0.3);
+          Intake::SetSpeed(1.0);
           Intake::Start();
-          pros::Task::delay(600);
-          //move the intake
+          //move it the rest of the way up
+          SetSpeed(50);
+          Intake::SetSpeed(0.5);
+          Move(1.0);
+          pros::delay(4500);
+          if(!isDeploying) //check for abort
+            continue;
+          //set the intake backwards
           Intake::SetBackwards();
-          Intake::SetSpeed(0.3);
-          Intake::Start();
-          pros::Task::delay(100);
-          if(!isDeploying) //check for abort
-            continue;
-          //move the intake
-          Intake::Stop();
-          //move the ramp
-          Deploy::Move(0.95F);
-          pros::Task::delay(3300);
-          if(!isDeploying) //check for abort
-            continue;
-          //move the intake
-          Intake::SetBackwards();
-          Intake::SetSpeed(0.4);
-          Intake::Start();
-          pros::Task::delay(600);
-          //move the ramp
-          Deploy::Move(0.9);
-          pros::Task::delay(200);
-          //move forwards
-          Motors::Chassis::frontLeft.moveVoltage(1500);
-          Motors::Chassis::frontRight.moveVoltage(-1500);
-          Motors::Chassis::backLeft.moveVoltage(1500);
-          Motors::Chassis::backRight.moveVoltage(-1500);
-          pros::delay(300);
-          Intake::Stop();
-          if(!isDeploying) //check for abort
-            continue;
-          // pros::delay(1300);
-          // pros::delay(1500);
-          //start the intake
-          Intake::Start();
-          //move the deploy
-          Deploy::Move(0.00F);
-          pros::delay(1500);
-          //move backwards
+          //drive backwards
           Motors::Chassis::frontLeft.moveVoltage(-2000);
           Motors::Chassis::frontRight.moveVoltage(2000);
           Motors::Chassis::backLeft.moveVoltage(-2000);
           Motors::Chassis::backRight.moveVoltage(2000);
-          pros::Task::delay(3000);
-          if(!isDeploying) //check for abort
-            continue;
-          Deploy::Move(0.0F);
-          Intake::SetForwards();
-          Intake::SetSpeed(1.00);
+          pros::delay(2000);
+          //stop
+          Motors::Chassis::frontLeft.moveVoltage(0);
+          Motors::Chassis::frontRight.moveVoltage(0);
+          Motors::Chassis::backLeft.moveVoltage(0);
+          Motors::Chassis::backRight.moveVoltage(0);
+          //stop intake
           Intake::Stop();
-          Arm::controller->setTarget(0);
+          //drop the ramp back down
+          Move(0.0);
           //finish
           isDeploying = false;
           isFinished = true;
-          //////////End of wide goal deploy code//////////
       }
       else
       {
@@ -282,33 +239,6 @@ namespace Deploy
       pros::delay(20);
     }
   }
-  //run the deploy sequence for the wide goal
-  // void DeployWide()
-  // {
-  //   //start the sequence
-  //   isDeploying = true;
-  //   isFinished = false;
-  //   isWide = true;
-  //   Deploy::Move(0.00F);
-  //   Arm::SetPosition(0);
-  //   while(true)
-  //   {
-  //     //check if finished
-  //     if(isFinished)
-  //     {
-  //       isDeploying = false;
-  //       isFinished = false;
-  //       break;
-  //     }
-  //     if(Core::master.getDigital(ControllerDigital::X))
-  //     {
-  //       isDeploying = false;
-  //       isFinished = false;
-  //       break;
-  //     }
-  //     pros::delay(20);
-  //   }
-  // }
 
   void Initialize()
   {
@@ -342,6 +272,25 @@ namespace Arm
     else
     {
       cur_pos = pos;
+    }
+    //set the motor
+    controller->setTarget(-cur_pos);
+  }
+  //set the position of the arm as a percentile decimal
+  void SetArm(float pos)
+  {
+    //check bounds
+    if(pos < 0)
+    {
+      cur_pos = 0.00F;
+    }
+    else if(pos > 1.00F)
+    {
+      cur_pos = maxHeight;
+    }
+    else
+    {
+      cur_pos = pos * maxHeight;
     }
     //set the motor
     controller->setTarget(-cur_pos);

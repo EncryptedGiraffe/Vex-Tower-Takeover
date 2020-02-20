@@ -134,6 +134,7 @@ void opcontrol()
 			else
 			{
 				Intake::SetSpeed(1.0);
+				Intake::SetForwards();
 				Intake::Start();
 				isIntakeRunning = true;
 			}
@@ -186,15 +187,11 @@ void opcontrol()
 		}
 		if(lowTower.changedToPressed())
 		{
-			SetDeployMiddle();
-			pros::delay(500);
 			arm_pos = Arm::lowTower;
 			Arm::SetPosition(arm_pos);
 		}
 		if(highTower.changedToPressed())
 		{
-			SetDeployMiddle();
-			pros::delay(500);
 			arm_pos = Arm::highTower;
 			Arm::SetPosition(arm_pos);
 		}

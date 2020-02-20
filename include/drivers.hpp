@@ -72,7 +72,8 @@ namespace Deploy
 {
   //bounds
   const int finalPosition = 4400;
-  const int maxSpeed = 50;
+  //set the speed of the ramp
+  void SetSpeed(int speed);
   //get the position of the ramp
   int GetPosition();
   //percent is a decimal percentage of the deploy system's total movement
@@ -91,13 +92,15 @@ namespace Arm
   //arm position controller
   extern std::shared_ptr<AsyncPositionController<double, double>> controller;
   //bounds
-  const int maxHeight = 4500;
+  const int maxHeight = 7000;
   const int maxSpeed = 200;
   //tower heights
-  const int lowTower = 2700;
-  const int highTower = 4000;
+  const int lowTower = 6000;
+  const int highTower = 7000;
   //set the position of the arm
   void SetPosition(int pos);
+  //set the position of the arm as a percentile decimal
+  void SetArm(float pos);
 }
 
 #endif
