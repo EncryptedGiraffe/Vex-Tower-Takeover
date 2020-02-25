@@ -24,17 +24,17 @@ namespace Ports
   namespace Chassis
   {
     const int frontLeft = 11;
-    const int frontRight = 12;
-    const int backLeft = 7;
-    const int backRight = 8;
+    const int frontRight = 1;
+    const int backLeft = 17;
+    const int backRight = 20;
   }
-  const int deploy = 14;
+  const int deploy = 13;
   namespace Intake
   {
-    const int left = 10;
-    const int right = 9;
+    const int left = 15;
+    const int right = 3;
   }
-  const int arm = 6;
+  const int arm = 7;
 }
 
 namespace Motors
