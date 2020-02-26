@@ -92,11 +92,11 @@ namespace Arm
   //arm position controller
   extern std::shared_ptr<AsyncPositionController<double, double>> controller;
   //bounds
-  const int maxHeight = 7000;
+  const int maxHeight = 4500;
   const int maxSpeed = 200;
   //tower heights
-  const int lowTower = 6000;
-  const int highTower = 7000;
+  const int lowTower = 3200;
+  const int highTower = 4400;
   //set the position of the arm
   void SetPosition(int pos);
   //set the position of the arm as a percentile decimal

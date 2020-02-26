@@ -153,6 +153,7 @@ void opcontrol()
 		//deploy
 		if(deployToggle.changedToPressed())
 		{
+			Deploy::SetSpeed(100);
 			if(isDeployed)
 			{
 				Deploy::Move(0.00F);

@@ -253,7 +253,7 @@ namespace Arm
   {
     controller = AsyncPosControllerBuilder()
     .withMotor(Ports::arm)
-    .withGearset(AbstractMotor::gearset::red)
+    .withGearset(AbstractMotor::gearset::green)
     .build();
   }
   int cur_pos = 0;
