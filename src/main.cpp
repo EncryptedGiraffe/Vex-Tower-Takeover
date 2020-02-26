@@ -112,7 +112,7 @@ void ArmBounds()
 
 void SetDeployMiddle()
 {
-	Deploy::Move(0.30F);
+	Deploy::SetTarget(0.30F);
 }
 
 void opcontrol()
@@ -151,38 +151,41 @@ void opcontrol()
 		//deploy
 		if(deployExtend.isPressed())
 		{
-<<<<<<< Updated upstream
-			Deploy::SetSpeed(100);
-			if(isDeployed)
+			//figure out where it is to adjust the speed
+			if(Deploy::GetActualPosition() < 0.6)
 			{
-				Deploy::Move(0.00F);
-				isDeployed = false;
+				//full speed
+				Deploy::SetSpeed(200);
+			}
+			else if(Deploy::GetActualPosition() < 0.85)
+			{
+				//half speed
+				Deploy::SetSpeed(100);
 			}
 			else
 			{
-				Deploy::Move(1.00F);
-				isDeployed = true;
+				//quarter speed
+				Deploy::SetSpeed(50);
 			}
-=======
 			//set the intake to its fully deployed target
-			Deploy::Move(1.00);
-			//figure out where it is to adjust the speed
+			Deploy::SetTarget(1.00);
 		}
-		else if(deployExtend.changedToReleased())
+		if(deployExtend.changedToReleased())
 		{
 			//stop the intake moving
-			Deploy::Move(Deploy::GetPosition());
->>>>>>> Stashed changes
+			Deploy::SetSpeed(100);
+			Deploy::SetTarget(Deploy::GetActualPosition());
 		}
 		if(deployMid.changedToPressed())
 		{
+			Deploy::SetSpeed(100);
 			SetDeployMiddle();
 		}
 		if(deployRetract.changedToPressed())
 		{
 			//full speed and retract
 			Deploy::SetSpeed(200);
-			Deploy::Move(0.00F);
+			Deploy::SetTarget(0.00F);
 		}
 		//arm control
 		if(armUp.isPressed())
