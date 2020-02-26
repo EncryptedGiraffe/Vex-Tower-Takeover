@@ -166,6 +166,7 @@ namespace Deploy
     {
       if(isDeploying)
       {
+        //THIS IS CURRENTLY UNUSED
           if(!isDeploying) //check for abort
             continue;
           //move the ramp most of the way up

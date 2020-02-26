@@ -76,21 +76,20 @@ const int arm_increment = 30;
 //opcontrol state variables
 bool isIntakeRunning = false;
 bool isDriveSlow = true;
-bool isDeployed = false;
 int arm_pos = 0;
 
 //buttons
 ControllerButton intakeToggle(ControllerDigital::R1);
 ControllerButton intakeReverse(ControllerDigital::R2);
 ControllerButton driveSpeedToggle(ControllerDigital::X);
-ControllerButton deployToggle(ControllerDigital::Y);
+ControllerButton deployExtend(ControllerDigital::Y);
 ControllerButton armUp(ControllerDigital::L1);
 ControllerButton armDown(ControllerDigital::L2);
 ControllerButton deployMid(ControllerDigital::B);
 ControllerButton highTower(ControllerDigital::up);
 ControllerButton lowTower(ControllerDigital::left);
 ControllerButton armBottom(ControllerDigital::down);
-ControllerButton deployTrigger(ControllerDigital::A);
+ControllerButton deployRetract(ControllerDigital::A);
 
 //drive variables
 float ch1;
@@ -113,7 +112,6 @@ void ArmBounds()
 
 void SetDeployMiddle()
 {
-	isDeployed = true;
 	Deploy::Move(0.30F);
 }
 
@@ -151,8 +149,9 @@ void opcontrol()
 			Intake::Stop();
 		}
 		//deploy
-		if(deployToggle.changedToPressed())
+		if(deployExtend.isPressed())
 		{
+<<<<<<< Updated upstream
 			Deploy::SetSpeed(100);
 			if(isDeployed)
 			{
@@ -164,14 +163,26 @@ void opcontrol()
 				Deploy::Move(1.00F);
 				isDeployed = true;
 			}
+=======
+			//set the intake to its fully deployed target
+			Deploy::Move(1.00);
+			//figure out where it is to adjust the speed
+		}
+		else if(deployExtend.changedToReleased())
+		{
+			//stop the intake moving
+			Deploy::Move(Deploy::GetPosition());
+>>>>>>> Stashed changes
 		}
 		if(deployMid.changedToPressed())
 		{
 			SetDeployMiddle();
 		}
-		if(deployTrigger.changedToPressed())
+		if(deployRetract.changedToPressed())
 		{
-			//Deploy::Deploy();
+			//full speed and retract
+			Deploy::SetSpeed(200);
+			Deploy::Move(0.00F);
 		}
 		//arm control
 		if(armUp.isPressed())
