@@ -171,7 +171,7 @@ void opcontrol()
 		}
 		if(deployTrigger.changedToPressed())
 		{
-			Deploy::Deploy();
+			//Deploy::Deploy();
 		}
 		//arm control
 		if(armUp.isPressed())
