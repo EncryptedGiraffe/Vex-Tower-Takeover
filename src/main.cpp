@@ -28,45 +28,50 @@ void autonomous()
 	// Core::Initialize();
 	if(isAutoRed)
 	{
-		//////////Legal but kinda not autonomous routine//////////
-		//start with preload angled in goal zone
-		//deploy
 		Core::Initialize();
-		//forward
-		Motors::Chassis::frontLeft.moveVoltage(5000);
-		Motors::Chassis::frontRight.moveVoltage(-5000);
-		Motors::Chassis::backLeft.moveVoltage(5000);
-		Motors::Chassis::backRight.moveVoltage(-5000);
-		pros::delay(1500);
-		Motors::Chassis::frontLeft.moveVoltage(0);
-		Motors::Chassis::frontRight.moveVoltage(0);
-		Motors::Chassis::backLeft.moveVoltage(0);
-		Motors::Chassis::backRight.moveVoltage(0);
-		pros::delay(500);
-		//intake off
-		Intake::Stop();
-		//////////End of legal but kinda not autonomous routine//////////
 	}
 	else
 	{
-		//////////Legal but kinda not autonomous routine//////////
-		//start with preload angled in goal zone
-		//deploy
 		Core::Initialize();
-		//forward
+		pros::delay(1000);
+		////////close blue *NEEDS TESTING*////////
+		// drive forwards to slurp up 4 cubes
 		Motors::Chassis::frontLeft.moveVoltage(5000);
     Motors::Chassis::frontRight.moveVoltage(-5000);
     Motors::Chassis::backLeft.moveVoltage(5000);
     Motors::Chassis::backRight.moveVoltage(-5000);
-		pros::delay(1500);
+		Intake::SetForwards();
+		Intake::SetSpeed(1.0F);
+		Intake::Start();
+		pros::delay(2500);
+		Intake::Stop();
+		// reverse back but not all the way
+		Motors::Chassis::frontLeft.moveVoltage(-7000);
+    Motors::Chassis::frontRight.moveVoltage(7000);
+    Motors::Chassis::backLeft.moveVoltage(-7000);
+    Motors::Chassis::backRight.moveVoltage(7000);
+		pros::delay(1000);
+		// rotate counter clockwise to face small goal zone corner
+		Motors::Chassis::frontLeft.moveVoltage(-7000);
+    Motors::Chassis::frontRight.moveVoltage(-7000);
+    Motors::Chassis::backLeft.moveVoltage(-7000);
+    Motors::Chassis::backRight.moveVoltage(-7000);
+		pros::delay(1200);
+		// drive forwards to meet edge of goal zone
+		Motors::Chassis::frontLeft.moveVoltage(7000);
+    Motors::Chassis::frontRight.moveVoltage(-7000);
+    Motors::Chassis::backLeft.moveVoltage(7000);
+    Motors::Chassis::backRight.moveVoltage(-7000);
+		pros::delay(700);
 		Motors::Chassis::frontLeft.moveVoltage(0);
     Motors::Chassis::frontRight.moveVoltage(0);
     Motors::Chassis::backLeft.moveVoltage(0);
     Motors::Chassis::backRight.moveVoltage(0);
-		pros::delay(500);
-		//intake off
-		Intake::Stop();
-		//////////End of legal but kinda not autonomous routine//////////
+		// deploy
+		Deploy::SetTarget(1.0F);
+		Deploy::SetSpeed(120);
+		pros::delay(4000);
+		////////end of close blue////////
 	}
 }
 
@@ -85,11 +90,11 @@ ControllerButton driveSpeedToggle(ControllerDigital::X);
 ControllerButton deployExtend(ControllerDigital::Y);
 ControllerButton armUp(ControllerDigital::L1);
 ControllerButton armDown(ControllerDigital::L2);
-ControllerButton deployMid(ControllerDigital::B);
+ControllerButton deployMid(ControllerDigital::A);
 ControllerButton highTower(ControllerDigital::up);
 ControllerButton lowTower(ControllerDigital::left);
 ControllerButton armBottom(ControllerDigital::down);
-ControllerButton deployRetract(ControllerDigital::A);
+ControllerButton deployRetract(ControllerDigital::B);
 
 //drive variables
 float ch1;

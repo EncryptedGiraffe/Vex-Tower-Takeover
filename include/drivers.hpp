@@ -71,7 +71,7 @@ namespace Intake
 namespace Deploy
 {
   //bounds
-  const int finalPosition = 4400;
+  const int finalPosition = 5500;
   //set the speed of the ramp
   void SetSpeed(int speed);
   //get the position of the ramp
