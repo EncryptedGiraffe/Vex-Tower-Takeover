@@ -10,31 +10,29 @@ void initialize()
 void disabled() {}
 
 bool isAutoRed = false;
-void SetBlueAuto()
-{
-	isAutoRed = false;
-}
-void SetRedAuto()
-{
-	isAutoRed = true;
-}
+bool isAutoDouble = false;
 void competition_initialize()
 {
-	PANS::UISystem::ConfigDialog("Select team:", "Red", SetRedAuto, "Blue", SetBlueAuto);
+	//select color
+	PANS::UISystem::ConfigDialog("Select team:", "Red", []{isAutoRed = true;}, "Blue", []{isAutoRed = false;});
+	//select starting position
+	PANS::UISystem::ConfigDialog("Select starting position:", "Single goal", []{isAutoDouble = false;}, "Double goal", []{isAutoDouble = true;});
 }
 
 void autonomous()
 {
 	// Core::Initialize();
-	if(isAutoRed)
+	if(isAutoDouble)
 	{
+		//////////AUTONOMOUS FOR THE DOUBLE GOAL STARTING POSITION//////////
 		Core::Initialize();
+		pros::delay(700);
 	}
 	else
 	{
+		/////////AUTONOMOUS FOR THE SINGLE GOAL STARTING POSITION/////////
 		Core::Initialize();
-		pros::delay(1000);
-		////////close blue *NEEDS TESTING*////////
+		pros::delay(700);
 		// drive forwards to slurp up 4 cubes
 		Motors::Chassis::frontLeft.moveVoltage(5000);
     Motors::Chassis::frontRight.moveVoltage(-5000);
@@ -43,20 +41,33 @@ void autonomous()
 		Intake::SetForwards();
 		Intake::SetSpeed(1.0F);
 		Intake::Start();
-		pros::delay(2500);
-		Intake::Stop();
+		pros::delay(2700);
 		// reverse back but not all the way
 		Motors::Chassis::frontLeft.moveVoltage(-7000);
     Motors::Chassis::frontRight.moveVoltage(7000);
     Motors::Chassis::backLeft.moveVoltage(-7000);
     Motors::Chassis::backRight.moveVoltage(7000);
-		pros::delay(1000);
-		// rotate counter clockwise to face small goal zone corner
-		Motors::Chassis::frontLeft.moveVoltage(-7000);
-    Motors::Chassis::frontRight.moveVoltage(-7000);
-    Motors::Chassis::backLeft.moveVoltage(-7000);
-    Motors::Chassis::backRight.moveVoltage(-7000);
-		pros::delay(1200);
+		pros::delay(350);
+		Intake::Stop();
+		pros::delay(700);
+		//check which side we are on so we know which way to rotate
+		if(isAutoRed)
+		{
+			// rotate clockwise to face small goal zone corner
+			Motors::Chassis::frontLeft.moveVoltage(7000);
+			Motors::Chassis::frontRight.moveVoltage(7000);
+			Motors::Chassis::backLeft.moveVoltage(7000);
+			Motors::Chassis::backRight.moveVoltage(7000);
+		}
+		else
+		{
+			// rotate counter clockwise to face small goal zone corner
+			Motors::Chassis::frontLeft.moveVoltage(-7000);
+	    Motors::Chassis::frontRight.moveVoltage(-7000);
+	    Motors::Chassis::backLeft.moveVoltage(-7000);
+	    Motors::Chassis::backRight.moveVoltage(-7000);
+		}
+		pros::delay(1100);
 		// drive forwards to meet edge of goal zone
 		Motors::Chassis::frontLeft.moveVoltage(7000);
     Motors::Chassis::frontRight.moveVoltage(-7000);
@@ -68,10 +79,24 @@ void autonomous()
     Motors::Chassis::backLeft.moveVoltage(0);
     Motors::Chassis::backRight.moveVoltage(0);
 		// deploy
-		Deploy::SetTarget(1.0F);
 		Deploy::SetSpeed(120);
-		pros::delay(4000);
-		////////end of close blue////////
+		Deploy::SetTarget(1.0F);
+		pros::delay(5000);
+		//set the intake to release the stack
+		Intake::SetBackwards();
+		Intake::Start();
+		// reverse back but not all the way
+		Motors::Chassis::frontLeft.moveVoltage(-7000);
+		Motors::Chassis::frontRight.moveVoltage(7000);
+		Motors::Chassis::backLeft.moveVoltage(-7000);
+		Motors::Chassis::backRight.moveVoltage(7000);
+		pros::delay(600);
+		//stop everything
+		Motors::Chassis::frontLeft.moveVoltage(0);
+		Motors::Chassis::frontRight.moveVoltage(0);
+		Motors::Chassis::backLeft.moveVoltage(0);
+		Motors::Chassis::backRight.moveVoltage(0);
+		Intake::Stop();
 	}
 }
 
