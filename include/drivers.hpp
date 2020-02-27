@@ -24,17 +24,17 @@ namespace Ports
   namespace Chassis
   {
     const int frontLeft = 11;
-    const int frontRight = 13;
-    const int backLeft = 14;
-    const int backRight = 15;
+    const int frontRight = 1;
+    const int backLeft = 17;
+    const int backRight = 20;
   }
-  const int deploy = 12;
+  const int deploy = 13;
   namespace Intake
   {
-    const int left = 20;
-    const int right = 17;
+    const int left = 15;
+    const int right = 3;
   }
-  const int arm = 13;
+  const int arm = 7;
 }
 
 namespace Motors
@@ -71,12 +71,15 @@ namespace Intake
 namespace Deploy
 {
   //bounds
-  const int finalPosition = 6750;
-  const int maxSpeed = 100;
+  const int finalPosition = 5500;
+  //set the speed of the ramp
+  void SetSpeed(int speed);
   //get the position of the ramp
-  int GetPosition();
+  float GetTargetPosition();
+  //get the actual position of the ramp
+  float GetActualPosition();
   //percent is a decimal percentage of the deploy system's total movement
-  void Move(float percent);
+  void SetTarget(float percent);
   //run the deploy sequence for the small goal
   void Deploy();
   //run the deploy sequence for the wide goal
@@ -94,10 +97,12 @@ namespace Arm
   const int maxHeight = 4500;
   const int maxSpeed = 200;
   //tower heights
-  const int lowTower = 2700;
-  const int highTower = 4000;
+  const int lowTower = 3200;
+  const int highTower = 4400;
   //set the position of the arm
   void SetPosition(int pos);
+  //set the position of the arm as a percentile decimal
+  void SetArm(float pos);
 }
 
 #endif
