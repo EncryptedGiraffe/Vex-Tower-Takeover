@@ -71,13 +71,15 @@ namespace Intake
 namespace Deploy
 {
   //bounds
-  const int finalPosition = 4400;
+  const int finalPosition = 5500;
   //set the speed of the ramp
   void SetSpeed(int speed);
   //get the position of the ramp
-  int GetPosition();
+  float GetTargetPosition();
+  //get the actual position of the ramp
+  float GetActualPosition();
   //percent is a decimal percentage of the deploy system's total movement
-  void Move(float percent);
+  void SetTarget(float percent);
   //run the deploy sequence for the small goal
   void Deploy();
   //run the deploy sequence for the wide goal

@@ -129,12 +129,17 @@ namespace Deploy
   int cur_pos = 0;
   int _speed = 50;
   //get the position of the ramp
-  int GetPosition()
+  float GetTargetPosition()
   {
     return cur_pos / finalPosition;
   }
+  //get the actual position of the ramp
+  float GetActualPosition()
+  {
+    return Motors::deploy.getPosition() / finalPosition;
+  }
   //percent is a decimal percentage of the deploy system's total movement
-  void Move(float percent)
+  void SetTarget(float percent)
   {
     float per;
     //check percent
@@ -166,11 +171,12 @@ namespace Deploy
     {
       if(isDeploying)
       {
+        //THIS IS CURRENTLY UNUSED
           if(!isDeploying) //check for abort
             continue;
           //move the ramp most of the way up
           SetSpeed(90);
-          Move(0.7);
+          SetTarget(0.7);
           pros::delay(2000);
           if(!isDeploying) //check for abort
             continue;
@@ -181,7 +187,7 @@ namespace Deploy
           //move it the rest of the way up
           SetSpeed(50);
           Intake::SetSpeed(0.5);
-          Move(1.0);
+          SetTarget(1.0);
           pros::delay(4500);
           if(!isDeploying) //check for abort
             continue;
@@ -201,7 +207,7 @@ namespace Deploy
           //stop intake
           Intake::Stop();
           //drop the ramp back down
-          Move(0.0);
+          SetTarget(0.0);
           //finish
           isDeploying = false;
           isFinished = true;
@@ -219,7 +225,7 @@ namespace Deploy
     isDeploying = true;
     isFinished = false;
     // isWide = false;
-    Deploy::Move(0.00F);
+    Deploy::SetTarget(0.00F);
     Arm::SetPosition(0);
     while(true)
     {
