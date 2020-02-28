@@ -13,9 +13,9 @@ bool isAutoRed = false;
 bool isAutoDouble = false;
 void competition_initialize()
 {
-	//select color
+	// select color
 	PANS::UISystem::ConfigDialog("Select team:", "Red", []{isAutoRed = true;}, "Blue", []{isAutoRed = false;});
-	//select starting position
+	// select starting position
 	PANS::UISystem::ConfigDialog("Select starting position:", "Single goal", []{isAutoDouble = false;}, "Double goal", []{isAutoDouble = true;});
 }
 
@@ -25,8 +25,123 @@ void autonomous()
 	if(isAutoDouble)
 	{
 		//////////AUTONOMOUS FOR THE DOUBLE GOAL STARTING POSITION//////////
+		// *programmed on blue*
+		// drive back
+		Motors::Chassis::frontLeft.moveVoltage(-7000);
+    Motors::Chassis::frontRight.moveVoltage(7000);
+    Motors::Chassis::backLeft.moveVoltage(-7000);
+    Motors::Chassis::backRight.moveVoltage(7000);
+		pros::delay(300);
+		// strife sideways to align with cube (right on blue)
+		Motors::Chassis::frontLeft.moveVoltage(7000);
+    Motors::Chassis::frontRight.moveVoltage(7000);
+    Motors::Chassis::backLeft.moveVoltage(-7000);
+    Motors::Chassis::backRight.moveVoltage(-7000);
+		pros::delay(300);
+		// deploy ramp + rollers
 		Core::Initialize();
 		pros::delay(700);
+		// drive forwards and slurp up preload in front
+		Motors::Chassis::frontLeft.moveVoltage(6000);
+    Motors::Chassis::frontRight.moveVoltage(-6000);
+    Motors::Chassis::backLeft.moveVoltage(6000);
+    Motors::Chassis::backRight.moveVoltage(-6000);
+		Intake::SetForwards();
+		Intake::SetSpeed(1.0F);
+		Intake::Start();
+		pros::delay(500);
+		Intake::Stop();
+		// rotate clockwise for cube to left of tower
+		Motors::Chassis::frontLeft.moveVoltage(7000);
+    Motors::Chassis::frontRight.moveVoltage(7000);
+    Motors::Chassis::backLeft.moveVoltage(7000);
+    Motors::Chassis::backRight.moveVoltage(7000);
+		pros::delay(500);
+		// drive forwards and slurp cube to left of tower
+		Motors::Chassis::frontLeft.moveVoltage(6000);
+    Motors::Chassis::frontRight.moveVoltage(-6000);
+    Motors::Chassis::backLeft.moveVoltage(6000);
+    Motors::Chassis::backRight.moveVoltage(-6000);
+		Intake::SetForwards();
+		Intake::SetSpeed(1.0F);
+		Intake::Start();
+		pros::delay(500);
+		Intake::Stop();
+		// // drive back
+		// Motors::Chassis::frontLeft.moveVoltage(-7000);
+    // Motors::Chassis::frontRight.moveVoltage(7000);
+    // Motors::Chassis::backLeft.moveVoltage(-7000);
+    // Motors::Chassis::backRight.moveVoltage(7000);
+		// pros::delay(700);
+		// // rotate clockwise to have back parallel to wall
+		// Motors::Chassis::frontLeft.moveVoltage(7000);
+    // Motors::Chassis::frontRight.moveVoltage(7000);
+    // Motors::Chassis::backLeft.moveVoltage(7000);
+    // Motors::Chassis::backRight.moveVoltage(7000);
+		// pros::delay(800);
+		// // stife to align with cubes (right for blue)
+		// Motors::Chassis::frontLeft.moveVoltage(7000);
+    // Motors::Chassis::frontRight.moveVoltage(7000);
+    // Motors::Chassis::backLeft.moveVoltage(-7000);
+    // Motors::Chassis::backRight.moveVoltage(-7000);
+		// pros::delay(700);
+		// // drive forwards and slurp
+		// Motors::Chassis::frontLeft.moveVoltage(6000);
+    // Motors::Chassis::frontRight.moveVoltage(-6000);
+    // Motors::Chassis::backLeft.moveVoltage(6000);
+    // Motors::Chassis::backRight.moveVoltage(-6000);
+		// Intake::SetForwards();
+		// Intake::SetSpeed(1.0F);
+		// Intake::Start();
+		// pros::delay(800);
+		// Intake::Stop();
+		// // 90 clockwise turn towards cube
+		// Motors::Chassis::frontLeft.moveVoltage(7000);
+    // Motors::Chassis::frontRight.moveVoltage(7000);
+    // Motors::Chassis::backLeft.moveVoltage(7000);
+    // Motors::Chassis::backRight.moveVoltage(7000);
+		// pros::delay(800);
+		// // drive forwards and slurp
+		// Motors::Chassis::frontLeft.moveVoltage(6000);
+    // Motors::Chassis::frontRight.moveVoltage(-6000);
+    // Motors::Chassis::backLeft.moveVoltage(6000);
+    // Motors::Chassis::backRight.moveVoltage(-6000);
+		// Intake::SetForwards();
+		// Intake::SetSpeed(1.0F);
+		// Intake::Start();
+		// pros::delay(800);
+		// Intake::Stop();
+		// // 45 clockwise turn towards deploy
+		// Motors::Chassis::frontLeft.moveVoltage(7000);
+		// Motors::Chassis::frontRight.moveVoltage(7000);
+		// Motors::Chassis::backLeft.moveVoltage(7000);
+		// Motors::Chassis::backRight.moveVoltage(7000);
+		// pros::delay(600);
+		// // drive forwards
+		// Motors::Chassis::frontLeft.moveVoltage(7000);
+		// Motors::Chassis::frontRight.moveVoltage(-7000);
+		// Motors::Chassis::backLeft.moveVoltage(7000);
+		// Motors::Chassis::backRight.moveVoltage(-7000);
+		// pros::delay(800);
+		// // deploy
+		// Deploy::SetSpeed(120);
+		// Deploy::SetTarget(1.0F);
+		// pros::delay(5000);
+		// //set the intake to release the stack
+		// Intake::SetBackwards();
+		// Intake::Start();
+		// // reverse back but not all the way
+		// Motors::Chassis::frontLeft.moveVoltage(-7000);
+		// Motors::Chassis::frontRight.moveVoltage(7000);
+		// Motors::Chassis::backLeft.moveVoltage(-7000);
+		// Motors::Chassis::backRight.moveVoltage(7000);
+		// pros::delay(600);
+		// //stop everything
+		// Motors::Chassis::frontLeft.moveVoltage(0);
+		// Motors::Chassis::frontRight.moveVoltage(0);
+		// Motors::Chassis::backLeft.moveVoltage(0);
+		// Motors::Chassis::backRight.moveVoltage(0);
+		// Intake::Stop();
 	}
 	else
 	{
@@ -50,7 +165,7 @@ void autonomous()
 		pros::delay(350);
 		Intake::Stop();
 		pros::delay(700);
-		//check which side we are on so we know which way to rotate
+		// check which side we are on so we know which way to rotate
 		if(isAutoRed)
 		{
 			// rotate clockwise to face small goal zone corner
