@@ -13,7 +13,7 @@ bool isAutoRed = false;
 bool isAutoDouble = false;
 void competition_initialize()
 {
-	// select color
+	// select colour
 	PANS::UISystem::ConfigDialog("Select team:", "Red", []{isAutoRed = true;}, "Blue", []{isAutoRed = false;});
 	// select starting position
 	PANS::UISystem::ConfigDialog("Select starting position:", "Single goal", []{isAutoDouble = false;}, "Double goal", []{isAutoDouble = true;});
@@ -371,7 +371,7 @@ void opcontrol()
 			else
 			{
 				isDriveSlow = true;
-				driveSpeed = 0.50;
+				driveSpeed = 0.65;
 			}
 		}
 		//open-loop drive control
