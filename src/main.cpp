@@ -25,6 +25,7 @@ void autonomous()
 	if(isAutoDouble)
 	{
 		//////////AUTONOMOUS FOR THE DOUBLE GOAL STARTING POSITION//////////
+		// *programmed on blue*
 		// drive back
 		Motors::Chassis::frontLeft.moveVoltage(-7000);
     Motors::Chassis::frontRight.moveVoltage(7000);
