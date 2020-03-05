@@ -53,25 +53,52 @@ void autonomous()
 		Motors::Chassis::frontRight.moveVoltage(0);
 		Motors::Chassis::backLeft.moveVoltage(0);
 		Motors::Chassis::backRight.moveVoltage(0);
-		// deploy ramp + rollers
-		Core::Initialize();
-		pros::delay(700);
-		//press against the wall
+		// strife away from wall
 		if(isAutoRed)
 		{
-			Motors::Chassis::frontLeft.moveVoltage(9000);
-			Motors::Chassis::frontRight.moveVoltage(9000);
-			Motors::Chassis::backLeft.moveVoltage(-9000);
-			Motors::Chassis::backRight.moveVoltage(-9000);
+			Motors::Chassis::frontLeft.moveVoltage(-6000);
+			Motors::Chassis::frontRight.moveVoltage(-6000);
+			Motors::Chassis::backLeft.moveVoltage(6000);
+			Motors::Chassis::backRight.moveVoltage(6000);
 		}
 		else
 		{
-			Motors::Chassis::frontLeft.moveVoltage(-9000);
-			Motors::Chassis::frontRight.moveVoltage(-9000);
-			Motors::Chassis::backLeft.moveVoltage(9000);
-			Motors::Chassis::backRight.moveVoltage(9000);
+			Motors::Chassis::frontLeft.moveVoltage(6000);
+			Motors::Chassis::frontRight.moveVoltage(6000);
+			Motors::Chassis::backLeft.moveVoltage(-6000);
+			Motors::Chassis::backRight.moveVoltage(-6000);
 		}
-		pros::delay(170);
+		pros::delay(500);
+		Motors::Chassis::frontLeft.moveVoltage(0);
+		Motors::Chassis::frontRight.moveVoltage(0);
+		Motors::Chassis::backLeft.moveVoltage(0);
+		Motors::Chassis::backRight.moveVoltage(0);
+		// deploy ramp + rollers
+		Core::Initialize();
+		pros::delay(700);
+		// rotate counterclockwise to align ourselves
+		Motors::Chassis::frontLeft.moveVoltage(-6000);
+		Motors::Chassis::frontRight.moveVoltage(-6000);
+		Motors::Chassis::backLeft.moveVoltage(-6000);
+		Motors::Chassis::backRight.moveVoltage(-6000);
+		pros::delay(150);
+		//press against the wall
+		if(isAutoRed)
+		{
+			Motors::Chassis::frontLeft.moveVoltage(7000);
+			Motors::Chassis::frontRight.moveVoltage(7000);
+			Motors::Chassis::backLeft.moveVoltage(-7000);
+			Motors::Chassis::backRight.moveVoltage(-7000);
+			pros::delay(550);
+		}
+		else
+		{
+			Motors::Chassis::frontLeft.moveVoltage(-7000);
+			Motors::Chassis::frontRight.moveVoltage(-7000);
+			Motors::Chassis::backLeft.moveVoltage(7000);
+			Motors::Chassis::backRight.moveVoltage(7000);
+			pros::delay(500);
+		}
 		// rotate first cube
 		if(isAutoRed)
 		{
@@ -224,21 +251,38 @@ void autonomous()
 		Motors::Chassis::frontRight.moveVoltage(-6000);
 		Motors::Chassis::backLeft.moveVoltage(6000);
 		Motors::Chassis::backRight.moveVoltage(-6000);
-		pros::delay(300);
+		pros::delay(450);
 		//stop
 		Motors::Chassis::frontLeft.moveVoltage(0);
 		Motors::Chassis::frontRight.moveVoltage(0);
 		Motors::Chassis::backLeft.moveVoltage(0);
 		Motors::Chassis::backRight.moveVoltage(0);
 		// deploy
-		Deploy::SetSpeed(120);
+		//figure out where it is to adjust the speed
+		if(Deploy::GetActualPosition() < 0.6)
+		{
+			//full speed
+			Deploy::SetSpeed(150);
+		}
+		else if(Deploy::GetActualPosition() < 0.85)
+		{
+			//half speed
+			Deploy::SetSpeed(75);
+		}
+		else
+		{
+			//quarter speed
+			Deploy::SetSpeed(30);
+		}
+		// Deploy::SetSpeed(120);
 		Deploy::SetTarget(1.0F);
 		Intake::Stop();
-		pros::delay(5000);
+		pros::delay(3100);
 		//set the intake to release the stack
 		Intake::SetBackwards();
 		Intake::Start();
 		Deploy::SetTarget(0.00);
+		pros::delay(500);
 		// reverse back but not all the way
 		Motors::Chassis::frontLeft.moveVoltage(-7000);
 		Motors::Chassis::frontRight.moveVoltage(7000);
@@ -250,6 +294,7 @@ void autonomous()
 		Motors::Chassis::frontRight.moveVoltage(0);
 		Motors::Chassis::backLeft.moveVoltage(0);
 		Motors::Chassis::backRight.moveVoltage(0);
+		Intake::Stop();
 	}
 	else
 	{
@@ -270,9 +315,8 @@ void autonomous()
     Motors::Chassis::frontRight.moveVoltage(7000);
     Motors::Chassis::backLeft.moveVoltage(-7000);
     Motors::Chassis::backRight.moveVoltage(7000);
-		pros::delay(350);
+		pros::delay(800);
 		Intake::Stop();
-		pros::delay(700);
 		// check which side we are on so we know which way to rotate
 		if(isAutoRed)
 		{
@@ -290,13 +334,13 @@ void autonomous()
 	    Motors::Chassis::backLeft.moveVoltage(-7000);
 	    Motors::Chassis::backRight.moveVoltage(-7000);
 		}
-		pros::delay(1100);
+		pros::delay(1200);
 		// drive forwards to meet edge of goal zone
 		Motors::Chassis::frontLeft.moveVoltage(7000);
     Motors::Chassis::frontRight.moveVoltage(-7000);
     Motors::Chassis::backLeft.moveVoltage(7000);
     Motors::Chassis::backRight.moveVoltage(-7000);
-		pros::delay(700);
+		pros::delay(800);
 		Motors::Chassis::frontLeft.moveVoltage(0);
     Motors::Chassis::frontRight.moveVoltage(0);
     Motors::Chassis::backLeft.moveVoltage(0);
@@ -304,10 +348,18 @@ void autonomous()
 		// deploy
 		Deploy::SetSpeed(120);
 		Deploy::SetTarget(1.0F);
-		pros::delay(5000);
+		pros::delay(4000);
+		//nudge forwards
+		Motors::Chassis::frontLeft.moveVoltage(7000);
+    Motors::Chassis::frontRight.moveVoltage(-7000);
+    Motors::Chassis::backLeft.moveVoltage(7000);
+    Motors::Chassis::backRight.moveVoltage(-7000);
+		pros::delay(100);
 		//set the intake to release the stack
 		Intake::SetBackwards();
 		Intake::Start();
+		Deploy::SetTarget(0.0F);
+		pros::delay(600);
 		// reverse back but not all the way
 		Motors::Chassis::frontLeft.moveVoltage(-7000);
 		Motors::Chassis::frontRight.moveVoltage(7000);
