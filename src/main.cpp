@@ -255,6 +255,40 @@ void autonomous()
 		Motors::Chassis::frontRight.moveVoltage(-6000);
 		Motors::Chassis::backLeft.moveVoltage(6000);
 		Motors::Chassis::backRight.moveVoltage(-6000);
+<<<<<<< Updated upstream
+=======
+		pros::delay(500);
+		//stop
+		Motors::Chassis::frontLeft.moveVoltage(0);
+		Motors::Chassis::frontRight.moveVoltage(0);
+		Motors::Chassis::backLeft.moveVoltage(0);
+		Motors::Chassis::backRight.moveVoltage(0);
+		// deploy
+		//figure out where it is to adjust the speed
+		if(Deploy::GetActualPosition() < 0.6)
+		{
+			//full speed
+			Deploy::SetSpeed(150);
+		}
+		else if(Deploy::GetActualPosition() < 0.85)
+		{
+			//half speed
+			Deploy::SetSpeed(75);
+		}
+		else
+		{
+			//quarter speed
+			Deploy::SetSpeed(30);
+		}
+		// Deploy::SetSpeed(120);
+		Deploy::SetTarget(1.0F);
+		Intake::Stop();
+		pros::delay(3100);
+		//set the intake to release the stack
+		Intake::SetBackwards();
+		Intake::Start();
+		Deploy::SetTarget(0.00);
+>>>>>>> Stashed changes
 		pros::delay(500);
 		//stop
 >>>>>>> Stashed changes
@@ -304,6 +338,7 @@ ControllerButton intakeToggle(ControllerDigital::R1);
 ControllerButton intakeReverse(ControllerDigital::R2);
 ControllerButton driveSpeedToggle(ControllerDigital::X);
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 ControllerButton deployToggle(ControllerDigital::Y);
 ControllerButton armUp(ControllerDigital::L1);
 ControllerButton armDown(ControllerDigital::L2);
@@ -313,6 +348,8 @@ ControllerButton lowTower(ControllerDigital::left);
 ControllerButton armBottom(ControllerDigital::down);
 ControllerButton deployTrigger(ControllerDigital::A);
 =======
+=======
+>>>>>>> Stashed changes
 ControllerButton armUp(ControllerDigital::L1);
 ControllerButton armDown(ControllerDigital::L2);
 ControllerButton highTower(ControllerDigital::up);
